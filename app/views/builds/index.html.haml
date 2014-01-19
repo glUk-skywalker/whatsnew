@@ -1,0 +1,7 @@
+%br
+- if !@builds.empty?
+  %ul
+    - @builds.each do |build|
+      %li
+        = link_to build.number, build
+        = '(' + build.tag + ')'

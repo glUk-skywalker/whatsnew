@@ -1,0 +1,34 @@
+- provide :title, " | #{ @build.number } (#{ @build.tag })"
+
+%strong
+  = @build.number + ' (' + @build.tag + ')'
+
+%table.table.table-bordered
+  %tr
+    %th
+      Bug number
+    %th
+      Summary
+    %th
+      Status
+    %th
+      Verificators
+  - if !@bugs.empty?
+    - @bugs.each do |bug|
+      %tr{ bgcolor: { 'VERIFIED' => '#67E46F', 'TO-VERIFY' => '#6C8CD5' }[bug[:status]] }
+        %td{ style: "vertical-align:middle" }
+          = link_to bug[:id], Settings.bugzilla_url + '/show_bug.cgi?id=' + bug[:id].to_s, target: '_blank'
+        %td{ style: "vertical-align:middle" }
+          = bug[:summary]
+        %td{ style: "vertical-align:middle" }
+          %strong= bug[:status]
+          - if !bug[:included]
+            %br
+            Last commit made AFTER build release!!
+        %td{ style: "vertical-align:middle" }
+          - if !bug[:assignments].empty?
+            %ul
+              - bug[:assignments].each do |assignment|
+                %li= assignment[:tester] + ' (' + assignment[:assignment] + ')'
+  - else
+    No bug found
