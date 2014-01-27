@@ -15,7 +15,7 @@
       Verificators
   - if !@bugs.empty?
     - @bugs.each do |bug|
-      %tr{ bgcolor: { 'VERIFIED' => '#67E46F', 'TO-VERIFY' => '#6C8CD5' }[bug[:status]] }
+      %tr{ bgcolor: { 'VERIFIED' => '#67E46F', 'TO-VERIFY' => '#6C8CD5', 'REOPENED' => '#FF7373'}[bug[:status]] }
         %td{ style: "vertical-align:middle" }
           = link_to bug[:id], Settings.bugzilla_url + '/show_bug.cgi?id=' + bug[:id].to_s, target: '_blank'
         %td{ style: "vertical-align:middle" }
