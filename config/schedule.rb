@@ -22,6 +22,6 @@ set :output, 'log/cron_log.txt'
 set :environment, 'development'
 
 every 1.hour do
-  rake "check_main"
-  rake "check_beta"
+  rake "check:main"
+  rake "check:beta"
 end
