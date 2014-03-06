@@ -1,28 +1,16 @@
-== README
+===Description===
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is specific app for my job purposes.
+It tracks bugs included in whatsnew list of build, wich currently testing (or any other), shows their statuses and qa engeneers, who are responsible for any bug.
 
-Things you may want to cover:
+First of all, system checks is there new build present (every predefined period of time, it's made with whenever gem and crontab). If there is, system saves its bumber along with time, when build was released, and list of fixed bugs included.
+Tester sees New build, click its link, and system asks bugzilla for bugs info (through bugzilla's XMLRPC). It is takes a few second sometimes :(. Some kind of "processing" indication needed.
+Once bugs info received, it nicely displayed. Every row represents a bug. Background color is releted to bug status:
+verified = green
+reopened = red
+<some other specific>
+There is also bugs, which got additional commits after build was released (it means, that such commit is not included in this build, of course). 
+System compares build date and date of last commit, and not show bugs, which received last commit after build release.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Also there is private info used to make this app work: my corporative credentials, our corporative URLs, list of QA engeneers.
+They are defined on special settings file, which, of course, noted in gitignore. It is loaded using rails_config gem.
