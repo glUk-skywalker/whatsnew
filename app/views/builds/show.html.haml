@@ -1,7 +1,29 @@
 - provide :title, " | #{ @build.number } (#{ @build.tag })"
 
-%strong
-  = @build.number + ' (' + @build.tag + ')'
+%table
+  %tr
+    %td
+      %strong
+        = @build.number + ' (' + @build.tag + ')'
+    %td
+      %table{ style: "table-layout: fixed;", border: 1 , bordercolor: 'grey' }
+        %tr
+          %td{ bgcolor: '#67E46F', width: "25px", align: "center", title: "Verified" }
+            = @bugs.find_all{ |bug| bug[:status] == 'VERIFIED' && bug[:included] }.length
+          %td{ bgcolor: '#6C8CD5', width: "25px", align: "center", align: "center", title: "To-verify" }
+            = @bugs.find_all{ |bug| bug[:status] == 'TO-VERIFY' && bug[:included] }.length
+          %td{ bgcolor: '#FF7373', width: "25px", align: "center", align: "center", title: "Reopened" }
+            = @bugs.find_all{ |bug| bug[:status] == 'REOPENED' && bug[:included] }.length
+          %td{ bgcolor: '#848181', width: "25px", align: "center", align: "center", title: "Closed" }
+            = @bugs.find_all{ |bug| bug[:status] == 'CLOSED' && bug[:included] }.length
+          %td{ width: "25px", align: "center", align: "center", title: "Not processed" }
+            = @bugs.find_all{ |bug| bug[:status] == 'RESOLVED' && bug[:included] }.length
+          %td{ width: "25px", align: "center", title: "Hidden (last commit doesn't included): #{ @bugs.find_all{ |bug| !bug[:included] }.map{ |bug| bug[:id] }.to_s[1..-2] }" }
+            %div{ style: "color:red" }
+              = @bugs.find_all{ |bug| !bug[:included] }.length
+          %td{ width: "65px", align: "center" }
+            Total:
+            = @bugs.length
 
 - if !@bugs.empty?
   %table.table.table-bordered
