@@ -15,3 +15,17 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
+
+$(function() {
+  $('#loading-indicator').hide();  // hide it initially.
+  $('#build-info').show();
+  $(document)  
+    .ajaxStart(function() {
+      $('#loading-indicator').show(); // show on any Ajax event.
+      $('#build-info').hide();
+    })
+    .ajaxStop(function() {
+      $('#loading-indicator').hide(); // hide it when it is done.
+      $('#build-info').show();
+  });
+});

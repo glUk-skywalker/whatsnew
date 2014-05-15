@@ -1,7 +1,15 @@
 %br
-- if !@builds.empty?
-  %ul
-    - @builds.each do |build|
-      %li
-        = link_to build.number, build
-        = '(' + build.tag + ')'
+%table{ width: "100%" }
+  %tr
+    %td{ width: "8%" }
+      - if !@builds.empty?
+        %ul
+          - @builds.each do |build|
+            %li
+              = link_to build.number, build, remote: true
+              = '(' + build.tag + ')'
+    %td{ align: "center", valign: "top" }
+      #loading-indicator
+        %br
+        =image_tag "loading.gif"
+      #build-info

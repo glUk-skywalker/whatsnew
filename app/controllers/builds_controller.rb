@@ -62,6 +62,10 @@ class BuildsController < ApplicationController
 
       @bugs << { id: bug['id'], summary: bug['summary'], status: bug['status'], assignments: assignments, included: included }
     end
+
+    respond_to do |format|
+      format.js
+    end
   end
 
 
