@@ -1,0 +1,58 @@
+- provide :title, " | #{ @build.number } (#{ @build.tag })"
+
+%table
+  %tr
+    %td
+      %strong
+        = @build.number + ' (' + @build.tag + ')'
+    %td
+      %table{ style: "table-layout: fixed;", border: 1 , bordercolor: 'grey' }
+        %tr
+          %td{ bgcolor: '#67E46F', width: "25px", align: "center", title: "Verified" }
+            = @bugs.find_all{ |bug| bug[:status] == 'VERIFIED' && bug[:included] }.length
+          %td{ bgcolor: '#6C8CD5', width: "25px", align: "center", align: "center", title: "To-verify" }
+            = @bugs.find_all{ |bug| bug[:status] == 'TO-VERIFY' && bug[:included] }.length
+          %td{ bgcolor: '#FF7373', width: "25px", align: "center", align: "center", title: "Reopened" }
+            = @bugs.find_all{ |bug| bug[:status] == 'REOPENED' && bug[:included] }.length
+          %td{ bgcolor: '#848181', width: "25px", align: "center", align: "center", title: "Closed" }
+            = @bugs.find_all{ |bug| bug[:status] == 'CLOSED' && bug[:included] }.length
+          %td{ width: "25px", align: "center", align: "center", title: "Not processed" }
+            = @bugs.find_all{ |bug| bug[:status] == 'RESOLVED' && bug[:included] }.length
+          %td{ width: "25px", align: "center", title: "Hidden (last commit doesn't included): #{ @bugs.find_all{ |bug| !bug[:included] }.map{ |bug| bug[:id] }.to_s[1..-2] }" }
+            %div{ style: "color:red" }
+              = @bugs.find_all{ |bug| !bug[:included] }.length
+          %td{ width: "65px", align: "center" }
+            Total:
+            = @bugs.length
+
+- if !@bugs.empty?
+  %table.table.table-bordered
+    %tr
+      %th{ bgcolor: "white" }
+        Bug number
+      %th
+        Summary
+      %th
+        Status
+      %th
+        Verificators
+    - @bugs.each do |bug|
+      - if bug[:included]
+        %tr{ bgcolor: { 'VERIFIED' => '#67E46F', 'TO-VERIFY' => '#6C8CD5', 'REOPENED' => '#FF7373', 'CLOSED' => '#848181' }[bug[:status]] }
+          %td{ style: "vertical-align:middle", bgcolor: "white" }
+            = link_to bug[:id], Settings.bugzilla_url + '/show_bug.cgi?id=' + bug[:id].to_s, target: '_blank'
+          %td{ style: "vertical-align:middle" }
+            = bug[:summary]
+          %td{ style: "vertical-align:middle" }
+            %strong= bug[:status]
+            /- if !bug[:included]
+            /  %br
+            /  Last commit made AFTER build release!!
+          %td{ style: "vertical-align:middle" }
+            - if !bug[:assignments].empty?
+              %ul
+                - bug[:assignments].each do |assignment|
+                  %li= assignment[:tester] + ' (' + assignment[:assignment] + ')'
+- else
+  No bug found
+
