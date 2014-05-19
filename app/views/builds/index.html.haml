@@ -1,12 +1,12 @@
 %br
 %table{ width: "100%" }
   %tr
-    %td{ width: "8%" }
+    %td{ width: "8%", valign: "top" }
       - if !@builds.empty?
         %ul
           - @builds.each do |build|
             %li
-              = link_to build.number, build, remote: true
+              = link_to build.number, build, remote: true, id: 'build-link'
               = '(' + build.tag + ')'
     %td{ align: "center", valign: "top" }
       #loading-indicator

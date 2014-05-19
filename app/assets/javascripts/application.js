@@ -16,6 +16,14 @@
 //= require bootstrap
 //= require_tree .
 
+$("document").ready(function() {
+    setTimeout(function() {
+        $("#build-link").trigger('click');
+    },10);
+});
+
+
+
 $(function() {
   $('#loading-indicator').hide();  // hide it initially.
   $('#build-info').show();
