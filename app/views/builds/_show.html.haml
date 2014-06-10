@@ -21,7 +21,7 @@
           %td{ width: "25px", align: "center", title: "Hidden (last commit doesn't included): #{ @bugs.find_all{ |bug| !bug[:included] }.map{ |bug| bug[:id] }.to_s[1..-2] }" }
             %div{ style: "color:red" }
               = @bugs.find_all{ |bug| !bug[:included] }.length
-          %td{ width: "65px", align: "center" }
+          %td{ width: "80px", align: "center" }
             Total:
             = @bugs.length
     %td
