@@ -2,13 +2,14 @@
 %table{ width: "100%" }
   %tr
     %td{ width: "8%", valign: "top" }
-      .build-list{ style: "width: 150px; height: 700px; overflow: auto" }
+      .build-list{ style: "width: 220px; height: 700px; overflow: auto" }
         - if !@builds.empty?
           %ul
             - @builds.each do |build|
               %li
                 = link_to build.number, build, remote: true, id: 'build-link'
                 = '(' + build.tag + ')'
+                = build.whatsnew_time.to_s[0..10]
     %td{ align: "center", valign: "top" }
       #loading-indicator
         %br
