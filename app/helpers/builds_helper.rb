@@ -12,7 +12,7 @@ module BuildsHelper
     new_build_number = open("#{ Settings.updates_url }/#{ tag }/buildno.txt").read
 
     if !Build.any? || Build.find_by(number: new_build_number).nil?
-      build_bugs = open("#{ Settings.updates_url }/#{ tag }/whatsnew.txt").read.split("Bugs Resolved:")[1].scan(/#\d+/).map{ |e| e[1..-1] }.join(",")
+      build_bugs = open("#{ Settings.updates_url }/#{ tag }/whatsnew.txt").read.split("Bugs Resolved:")[1].scan(/\n#\d+/).map{ |e| e[2..-1] }.join(",")
       Build.create(number: new_build_number, tag: tag, bug_list: build_bugs, whatsnew_time: whatsnew_time)
     end
   end
