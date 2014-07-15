@@ -46,12 +46,12 @@
               = link_to bug[:id], Settings.bugzilla_url + '/show_bug.cgi?id=' + bug[:id].to_s, target: '_blank'
             %td{ style: "vertical-align:middle" }
               = bug[:summary]
-            %td{ style: "vertical-align: middle; width: 75px" }
+            %td{ style: "vertical-align: middle; width: 95px; align: center" }
               %strong= bug[:status]
               /- if !bug[:included]
               /  %br
               /  Last commit made AFTER build release!!
-            %td{ style: "vertical-align: middle; width: 340px" }
+            %td{ style: "vertical-align: middle; width: 350px" }
               - if !bug[:assignments].empty?
                 %ul
                   - bug[:assignments].each do |assignment|
