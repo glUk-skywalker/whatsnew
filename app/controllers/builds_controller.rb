@@ -63,6 +63,12 @@ class BuildsController < ApplicationController
       @bugs << { id: bug['id'], summary: bug['summary'], status: bug['status'], assignments: assignments, included: included }
     end
 
+    processed = true
+    @bugs.each do |bug|
+      processed = false if bug[:status] == "RESOLVED" && bug[:included]
+    end
+    @build.update_attributes(processed: processed)
+
     respond_to do |format|
       format.js
     end

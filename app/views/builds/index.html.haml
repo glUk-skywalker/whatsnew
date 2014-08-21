@@ -2,14 +2,22 @@
 %table{ width: "100%" }
   %tr
     %td{ width: "8%", valign: "top" }
-      .build-list{ style: "width: 220px; height: 700px; overflow: auto" }
+      .build-list{ style: "width: 240px; height: 700px; overflow: auto" }
         - if !@builds.empty?
-          %ul
+          %ul{ type: "none" }
             - @builds.each do |build|
               %li
-                = link_to build.number, build, remote: true, id: 'build-link'
-                = '(' + build.tag + ')'
-                = build.whatsnew_time.to_s[0..10]
+                %table
+                  %tr
+                    %td{ width: 20 }
+                      - if !build.processed
+                        = image_tag "not_fully_processed.png", title: "Verification is not completed!"
+                      - else 
+                        = image_tag "processed.png", title: "Verification completed"
+                    %td
+                      = link_to build.number, build, remote: true, id: 'build-link'
+                      = '(' + build.tag + ')'
+                      = build.whatsnew_time.to_s[0..10]
     %td{ align: "center", valign: "top" }
       #loading-indicator
         %br
