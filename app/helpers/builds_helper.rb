@@ -15,6 +15,12 @@ module BuildsHelper
       build_bugs = open("#{ Settings.updates_url }/#{ tag }/whatsnew.txt").read.split("Bugs Resolved:")[1].scan(/\n#\d+/).map{ |e| e[2..-1] }.join(",")
       Build.create(number: new_build_number, tag: tag, bug_list: build_bugs, whatsnew_time: whatsnew_time)
     end
+
+    config = Rails.configuration.database_configuration
+    db = config[Rails.env]["database"]
+    usr = config[Rails.env]["username"]
+    pwd = config[Rails.env]["password"]
+    system "mysqldump -u#{ usr } -p#{ pwd } #{ db } > ./db/db_dump.sql"
   end
 
 end

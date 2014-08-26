@@ -17,3 +17,4 @@
 /config/database.yml
 /config/settings.yml
 /log/cron_log.txt
+/db/db_dump.sql
