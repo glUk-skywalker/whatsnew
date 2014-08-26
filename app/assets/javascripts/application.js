@@ -22,7 +22,7 @@ $("document").ready(function() {
     },10);
 });
 
-
+$(document).on("change", "#check-all", function(){ $("[data-toggle=popover]").popover(); });
 
 $(function() {
   $('#loading-indicator').hide();  // hide it initially.
@@ -35,5 +35,18 @@ $(function() {
     .ajaxStop(function() {
       $('#loading-indicator').hide(); // hide it when it is done.
       $('#build-info').show();
-  });
+
+      //reactivate js functions after ajax:
+      $("#toggle_not_included").click(function() {
+        if($(".collapse").hasClass("out")) {
+            $(".collapse").addClass("in");
+            $(".collapse").removeClass("out");
+            $("#toggle_not_included").text("hide");
+        } else {
+            $(".collapse").addClass("out");
+            $(".collapse").removeClass("in");
+            $("#toggle_not_included").text("show");
+        }
+      });
+    });
 });

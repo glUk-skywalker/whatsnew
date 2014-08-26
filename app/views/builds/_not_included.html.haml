@@ -1,0 +1,14 @@
+%table
+  - bugs.each do |bug|
+    %tr
+      %td{ width: "50px" }
+        = link_to bug[:id], Settings.bugzilla_url + '/show_bug.cgi?id=' + bug[:id].to_s, target: '_blank'
+      %td
+        = "#{ bug[:summary] }"
+      %td{ width: "95px", align: "center" }
+        %b= "#{ bug[:status] }"
+      %td{ width: "350px", align: "left" }
+        - if !bug[:assignments].empty?
+          %ul{ type: "none" }
+            - bug[:assignments].each do |assignment|
+              %li= assignment[:tester] + ' (' + assignment[:assignment] + ')'
