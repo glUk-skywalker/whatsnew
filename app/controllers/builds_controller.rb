@@ -65,7 +65,7 @@ class BuildsController < ApplicationController
 
     processed = true
     @bugs.each do |bug|
-      processed = false if bug[:status] == "RESOLVED" && bug[:included]
+      processed = false if (bug[:status] == "RESOLVED" || bug[:status] == "TO-VERIFY") && bug[:included]
     end
     @build.update_attributes(processed: processed)
 
