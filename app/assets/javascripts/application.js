@@ -17,12 +17,18 @@
 //= require_tree .
 
 $("document").ready(function() {
+    $(".build-link").click(function(){
+      $(".build-link").removeClass("selected")
+      $(this).addClass("selected")
+    });
+
     setTimeout(function() {
         $("#build-link").trigger('click');
     },10);
 });
 
 $(document).on("change", "#check-all", function(){ $("[data-toggle=popover]").popover(); });
+
 
 $(function() {
   $('#loading-indicator').hide();  // hide it initially.

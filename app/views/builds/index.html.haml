@@ -15,7 +15,7 @@
                       - else 
                         = image_tag "processed.png", title: "Verification completed"
                     %td
-                      = link_to build.number, build, remote: true, id: 'build-link'
+                      = link_to build.number, build, remote: true, id: 'build-link', class: 'build-link'
                       = '(' + build.tag + ')'
                       = build.whatsnew_time.to_s[0..10]
     %td{ align: "center", valign: "top" }
