@@ -1,23 +1,23 @@
 %br
 %table{ width: "100%" }
   %tr
-    %td{ width: "8%", valign: "top" }
-      .build-list{ style: "width: 240px; height: 700px; overflow: auto" }
+    %td{ valign: "top" }
+      .build-list{ style: "width: 200px; height: 700px; overflow: auto" }
         - if !@builds.empty?
-          %ul{ type: "none" }
-            - @builds.each do |build|
-              %li
-                %table
-                  %tr
-                    %td{ width: 20 }
-                      - if !build.processed
-                        = image_tag "not_fully_processed.png", title: "Verification is not completed!"
-                      - else 
-                        = image_tag "processed.png", title: "Verification completed"
-                    %td
-                      = link_to build.number, build, remote: true, id: 'build-link', class: 'build-link'
-                      = '(' + build.tag + ')'
-                      = build.whatsnew_time.to_s[0..10]
+          - @builds.each do |build|
+            %table
+              %tr
+                %td{ width: 20 }
+                  - if !build.processed
+                    = image_tag "not_fully_processed.png", title: "Verification is not completed!"
+                  - else 
+                    = image_tag "processed.png", title: "Verification completed"
+                %td{ width: 35 }
+                  = link_to build.number, build, remote: true, id: 'build-link', class: 'build-link'
+                %td{ width: 45 }  
+                  = '(' + build.tag + ')'
+                %td
+                  = build.whatsnew_time.to_s[0..10]
     %td{ align: "center", valign: "top" }
       #loading-indicator
         %br
