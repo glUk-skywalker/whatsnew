@@ -18,8 +18,10 @@
 
 $("document").ready(function() {
     $(".build-link").click(function(){
-      $(".build-link").removeClass("selected")
-      $(this).addClass("selected")
+      $(".build-link").removeClass("selected");
+      $(".build-row").removeClass("selected");
+      $(this).addClass("selected");
+      $(this).parent().parent().addClass("selected");
     });
 
     setTimeout(function() {

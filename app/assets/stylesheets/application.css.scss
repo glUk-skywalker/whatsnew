@@ -15,3 +15,17 @@
 @import url('http://getbootstrap.com/dist/css/bootstrap.css');
 
 .build-link.selected { font-weight: bold }
+
+.build-row.selected {
+  background-color: white;
+  outline: thin solid black;
+}
+
+.build-row:hover {
+  background-color: white;
+}
+
+.builds-table {
+  margin-top: 1px;
+  margin-left: 1px;
+}
