@@ -59,9 +59,10 @@
           %td{ style: "vertical-align: middle; width: 350px" }
             %font{ color: html_color }
               - if !bug[:assignments].empty?
-                %ul
+                %table
                   - bug[:assignments].each do |assignment|
-                    %li= assignment[:tester] + ' (' + assignment[:assignment] + ')'
+                    %tr
+                      %td= assignment[:tester] + ' (' + assignment[:assignment] + ')'
   - else
     No bug found
 
