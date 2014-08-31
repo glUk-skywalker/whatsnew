@@ -31,5 +31,14 @@
 }
 
 .bugs-table {
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+.bug-row:hover {
+  outline: thin solid black;
+}
+
+.bug-list {
   margin-top: 10px;
 }
