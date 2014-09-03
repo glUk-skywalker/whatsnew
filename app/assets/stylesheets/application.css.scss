@@ -33,10 +33,16 @@
 .bugs-table {
   margin-left: 1px;
   margin-right: 1px;
+  border-collapse: separate;
+  border-spacing: 0px 1px;
 }
 
 .bug-row:hover {
   outline: thin solid black;
+}
+
+.bug-row.included-false {
+  opacity: 0.7;
 }
 
 .bug-list {

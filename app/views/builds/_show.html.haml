@@ -42,28 +42,21 @@
         %th
           Verificators
       - @bugs.each do |bug|
-        - html_class = " not-included"
-        - html_color = "grey"
-        - html_title = "Last commit in this bug made AFTER build release"
-        - html_title = html_color = html_class = "" if bug[:included]
-        %tr.bug-row{ bgcolor: { 'VERIFIED' => '#67E46F', 'TO-VERIFY' => '#6C8CD5', 'REOPENED' => '#FF7373', 'CLOSED' => '#848181' }[bug[:status]], class: "collapse in " + bug[:status].downcase + html_class, title: html_title }
+        %tr.bug-row.collapse.in{ bgcolor: { 'VERIFIED' => '#67E46F', 'TO-VERIFY' => '#6C8CD5', 'REOPENED' => '#FF7373', 'CLOSED' => '#848181' }[bug[:status]], class: bug[:status].downcase + " " + "included-#{ bug[:included].to_s }", title: bug[:included] ? "" : "Last commit in this bug made AFTER build release" }
           %td{ style: "vertical-align: middle; width: 65px", bgcolor: "white" }
             .bug-link-container
-              %font{ color: html_color }
+              %font
                 = link_to bug[:id], Settings.bugzilla_url + '/show_bug.cgi?id=' + bug[:id].to_s, target: '_blank'
           %td{ style: "vertical-align:middle;" }
-            %font{ color: html_color }
-              = bug[:summary]
+            = bug[:summary]
           %td{ style: "vertical-align: middle; width: 95px; align: center" }
-            %font{ color: html_color }
-              %strong= bug[:status]
+            %strong= bug[:status]
           %td{ style: "vertical-align: middle; width: 350px" }
-            %font{ color: html_color }
-              - if !bug[:assignments].empty?
-                %table
-                  - bug[:assignments].each do |assignment|
-                    %tr
-                      %td= assignment[:tester] + ' (' + assignment[:assignment] + ')'
+            - if !bug[:assignments].empty?
+              %table
+                - bug[:assignments].each do |assignment|
+                  %tr
+                    %td= assignment[:tester] + ' (' + assignment[:assignment] + ')'
   - else
     No bug found
 
