@@ -1,0 +1,10 @@
+%table.stats
+  - ['VERIFIED', 'TO-VERIFY', 'REOPENED', 'CLOSED', 'RESOLVED'].each do |status|
+    %tr{ class: status.downcase + "-row" }
+      %td= check_box_tag status.downcase, 1, true, class: status.downcase + " stats-checkbox"
+      %td= status
+      %td= @bugs.find_all{ |bug| bug[:status] == status }.length
+  %tr
+    %td= check_box_tag "not-included", 1, true, class: "not-included stats-checkbox" 
+    %td= "Not included"
+    %td= @bugs.find_all{ |bug| !bug[:included] }.length 

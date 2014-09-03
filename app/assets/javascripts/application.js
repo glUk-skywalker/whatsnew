@@ -45,16 +45,16 @@ $(function() {
       $('#build-info').show();
 
       //reactivate js functions after ajax:
-      $("#toggle_not_included").click(function() {
-        if($(".collapse").hasClass("out")) {
-            $(".collapse").addClass("in");
-            $(".collapse").removeClass("out");
-            $("#toggle_not_included").text("hide");
-        } else {
-            $(".collapse").addClass("out");
-            $(".collapse").removeClass("in");
-            $("#toggle_not_included").text("show");
-        }
+      $(".stats-checkbox").click(function() {
+        $(".collapse").removeClass("out");
+        $(".collapse").addClass("in");
+
+        $(".stats-checkbox").each(function(){
+          if( !$(this).is(":checked") ) {
+            $(".collapse." + $(this).attr("id")).removeClass("in");
+            $(".collapse." + $(this).attr("id")).addClass("out");
+          }
+        });
       });
     });
 });

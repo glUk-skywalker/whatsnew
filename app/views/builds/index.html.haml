@@ -3,6 +3,8 @@
   %tr
     %td{ style: "width: 200px;", valign: "top" }
       .build-list{ style: "height: 700px; overflow: auto" }
+        #stats-container
+
         - if !@builds.empty?
           - @builds.each do |build|
             %table.builds-table

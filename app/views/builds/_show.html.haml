@@ -42,11 +42,11 @@
         %th
           Verificators
       - @bugs.each do |bug|
-        - html_class = "collapse out"
+        - html_class = " not-included"
         - html_color = "grey"
         - html_title = "Last commit in this bug made AFTER build release"
         - html_title = html_color = html_class = "" if bug[:included]
-        %tr.bug-row{ bgcolor: { 'VERIFIED' => '#67E46F', 'TO-VERIFY' => '#6C8CD5', 'REOPENED' => '#FF7373', 'CLOSED' => '#848181' }[bug[:status]], class: html_class, title: html_title }
+        %tr.bug-row{ bgcolor: { 'VERIFIED' => '#67E46F', 'TO-VERIFY' => '#6C8CD5', 'REOPENED' => '#FF7373', 'CLOSED' => '#848181' }[bug[:status]], class: "collapse in " + bug[:status].downcase + html_class, title: html_title }
           %td{ style: "vertical-align: middle; width: 65px", bgcolor: "white" }
             .bug-link-container
               %font{ color: html_color }
