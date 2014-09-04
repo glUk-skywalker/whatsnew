@@ -14,15 +14,19 @@
 
 @import url('http://getbootstrap.com/dist/css/bootstrap.css');
 
-.build-link.selected { font-weight: bold }
 
-.build-row.selected {
-  background-color: white;
-  outline: thin solid black;
-}
 
-.build-row:hover {
-  background-color: white;
+.build-row {
+  &.selected {
+    background-color: white;
+    outline: thin solid black;
+  }
+
+  .build-link.selected { font-weight: bold }
+
+  &:hover {
+    background-color: white;
+  }
 }
 
 .builds-table {
@@ -37,12 +41,14 @@
   border-spacing: 0px 1px;
 }
 
-.bug-row:hover {
-  outline: thin solid black;
-}
+.bug-row {
+  &:hover {
+    outline: thin solid black;
+  }
 
-.bug-row.included-false {
-  opacity: 0.7;
+  &.included-false {
+    opacity: 0.6;
+  }
 }
 
 .bug-list {
@@ -58,5 +64,17 @@
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+  }
+}
+
+#stats-container {
+  height: 270px;
+
+  strong {
+    font-size: 25px;
+  }
+
+  td {
+    padding: 2px 2px 2px 2px;
   }
 }

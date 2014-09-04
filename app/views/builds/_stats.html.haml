@@ -1,3 +1,16 @@
+%table
+  %tr
+    %td
+      - if !@build.processed
+        = image_tag "not_fully_processed-large.png", title: "Verification is not completed!"
+      - else 
+        = image_tag "processed-large.png", title: "Verification completed"
+    %td
+      %strong
+        = @build.number + ' (' + @build.tag + ')'
+    %td
+      = link_to image_tag("refresh.png"), @build, remote: true, title: "Refresh"
+
 %table.stats
   - ['VERIFIED', 'TO-VERIFY', 'REOPENED', 'CLOSED', 'RESOLVED'].each do |status|
     %tr{ class: status.downcase + "-row" }
@@ -5,6 +18,14 @@
       %td= status
       %td= @bugs.find_all{ |bug| bug[:status] == status }.length
   %tr
+    %td
+    %td= "TOTAL"
+    %td= @bugs.length 
+  %tr
     %td= check_box_tag "included-false", 1, true, class: "included-false stats-checkbox" 
     %td= "Not included"
     %td= @bugs.find_all{ |bug| !bug[:included] }.length 
+  %tr{ title: "NOT IMPLEMENTED!" }
+    %td= check_box_tag "verificator", 1, true, class: "verificator stats-checkbox", disabled: "disabled"
+    %td= "I'm verificator"
+    %td= "NULL"
