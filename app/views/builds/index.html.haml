@@ -3,6 +3,7 @@
   %tr
     %td{ style: "width: 200px;", valign: "top" }
       #stats-container
+        #stats-subcontainer
       .build-list{ style: "height: 430px; overflow: auto" }
         - if !@builds.empty?
           - @builds.each do |build|
@@ -20,7 +21,7 @@
                 %td{ width: 78 } 
                   = build.whatsnew_time.to_s[0..10]
     %td{ align: "center", valign: "top" }
-      #loading-indicator
+      #loading-indicator{ style: "margin-left: -200px" }
         %br
         = image_tag "loading.gif"
       #build-info

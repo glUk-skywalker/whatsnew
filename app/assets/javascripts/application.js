@@ -39,10 +39,12 @@ $(function() {
     .ajaxStart(function() {
       $('#loading-indicator').show(); // show on any Ajax event.
       $('#build-info').hide();
+      $('#stats-subcontainer').hide();
     })
     .ajaxStop(function() {
       $('#loading-indicator').hide(); // hide it when it is done.
       $('#build-info').show();
+      $('#stats-subcontainer').show();
 
       //reactivate js functions after ajax:
       $(".stats-checkbox").click(function() {

@@ -1,31 +1,31 @@
-%table
+%table.stats-title
   %tr
     %td
       - if !@build.processed
         = image_tag "not_fully_processed-large.png", title: "Verification is not completed!"
       - else 
         = image_tag "processed-large.png", title: "Verification completed"
-    %td
+    %td.build-number
       %strong
         = @build.number + ' (' + @build.tag + ')'
-    %td
+    %td.refresh
       = link_to image_tag("refresh.png"), @build, remote: true, title: "Refresh"
 
 %table.stats
   - ['VERIFIED', 'TO-VERIFY', 'REOPENED', 'CLOSED', 'RESOLVED'].each do |status|
     %tr{ class: status.downcase + "-row" }
       %td= check_box_tag status.downcase, 1, true, class: status.downcase + " stats-checkbox"
-      %td= status
-      %td= @bugs.find_all{ |bug| bug[:status] == status }.length
+      %td.status{ class: status.downcase }= status
+      %td.value= @bugs.find_all{ |bug| bug[:status] == status }.length
   %tr
     %td
     %td= "TOTAL"
-    %td= @bugs.length 
-  %tr
+    %td.value= @bugs.length 
+  %tr{ title: "Last commit in this bug made AFTER build release" }
     %td= check_box_tag "included-false", 1, true, class: "included-false stats-checkbox" 
     %td= "Not included"
-    %td= @bugs.find_all{ |bug| !bug[:included] }.length 
+    %td.value= @bugs.find_all{ |bug| !bug[:included] }.length 
   %tr{ title: "NOT IMPLEMENTED!" }
     %td= check_box_tag "verificator", 1, true, class: "verificator stats-checkbox", disabled: "disabled"
     %td= "I'm verificator"
-    %td= "NULL"
+    %td.value= "NULL"
