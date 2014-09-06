@@ -52,9 +52,6 @@ $("document").ready(function() {
     },10);
 });
 
-$(document).on("change", "#check-all", function(){ $("[data-toggle=popover]").popover(); });
-
-
 $(function() {
   $('#loading-indicator').hide();  // hide it initially.
   $('#build-info').show();
