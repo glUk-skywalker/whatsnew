@@ -70,6 +70,7 @@ $(function() {
       $('#stats-subcontainer').show();
 
       //reactivate js functions after ajax:
+
       $(".stats-checkbox").click(function() {
         $(".collapse").removeClass("out");
         $(".collapse").addClass("in");
@@ -83,10 +84,15 @@ $(function() {
         });
       });
 
+      //restore checkboxes form cookies
       $(".stats-checkbox").each(function() {
         if(readCookie("show_" + this.id) == 'false'){
           this.click();
         };
       });
+
+      //apply new status icon in build list
+      var build = $(".stats-title td.build-number").text().trim().substr(0, 4);
+      $(".build-row." + build + " img").attr("src", "/assets/" + $("#large-status-icon").attr("class") + ".png").hide().show();
     });
 });

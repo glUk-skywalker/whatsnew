@@ -8,12 +8,9 @@
         - if !@builds.empty?
           - @builds.each do |build|
             %table.builds-table
-              %tr.build-row
+              %tr.build-row{ class: build.number }
                 %td{ width: 22 }
-                  - if !build.processed
-                    = image_tag "not_fully_processed.png", title: "Verification is not completed!"
-                  - else 
-                    = image_tag "processed.png", title: "Verification completed"
+                  = image_tag !build.processed ? "not_fully_processed.png" : "processed.png"
                 %td{ width: 35 }
                   = link_to build.number, build, remote: true, id: 'build-link', class: 'build-link'
                 %td{ width: 45 }
