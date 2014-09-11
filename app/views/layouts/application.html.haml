@@ -9,7 +9,12 @@
     = csrf_meta_tags
   %body
     %header
-      = render 'layouts/navigation'
+      /= render 'layouts/navigation'
+      #my-navigation
+        You are working as
+        = text_field_tag "user_name"
+        = "@" + Settings.email_server_url
+        = button_tag "Save"
     %main{:role => "main"}
       = render 'layouts/messages'
       = yield

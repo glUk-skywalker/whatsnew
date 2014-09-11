@@ -114,3 +114,20 @@ $closed_color: #848181;
     margin-top: 10px;
   }
 }
+
+#my-navigation {
+  height: 51px;
+  background-color: #000000;
+  text-align: right;
+  padding: 12px 12px 12px 12px;
+  color: #FFFFFF;
+
+  button {
+    color: #000000;
+  }
+
+  input {
+    text-align: right;
+    color: #000000;
+  }
+}
