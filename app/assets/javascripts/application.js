@@ -96,7 +96,7 @@ $(function() {
         });
       });
 
-      if( readCookie("curren_user").length > 0 ){
+      if( readCookie("current_user").length > 0 ){
         $("input.verificator").removeAttr("disabled");
       };
 
