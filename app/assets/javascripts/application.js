@@ -48,8 +48,10 @@ $("document").ready(function() {
     });
 
     $("#save_user_button").click(function(){
-      createCookie("curren_user", $("#user_name").val(), 30);
-      location.reload(true);
+      if( $("#user_name").val().length > 0 ){
+        createCookie("curren_user", $("#user_name").val(), 30);
+        location.reload(true);
+      };
     });
 
     $('#user_name').keyup(function(e){
