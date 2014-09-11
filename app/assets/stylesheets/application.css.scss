@@ -122,12 +122,14 @@ $closed_color: #848181;
   padding: 12px 12px 12px 12px;
   color: #FFFFFF;
 
-  button {
-    color: #000000;
+  #save_user_button {
+    color:#000000;
   }
 
   input {
     text-align: right;
     color: #000000;
+    width: 100px;
   }
 }
+
