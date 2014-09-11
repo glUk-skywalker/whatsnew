@@ -21,11 +21,11 @@
     %td
     %td= "TOTAL"
     %td.value= @bugs.length 
-  %tr{ title: "Last commit in this bug made AFTER build release" }
+  %tr{ title: "Show/Hide bugs, which got new commits after build release" }
     %td= check_box_tag "included-false", 1, true, class: "included-false stats-checkbox" 
     %td= "Not included"
     %td.value
-  %tr{ title: "Show ONLY my bugs" }
+  %tr{ title: "Show my bugs ONLY" }
     %td= check_box_tag "verificator", 1, false, class: "verificator stats-checkbox", disabled: "disabled"
     %td= "My bugs only"
     %td.value
