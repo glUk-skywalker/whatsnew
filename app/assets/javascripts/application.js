@@ -49,7 +49,7 @@ $("document").ready(function() {
 
     $("#save_user_button").click(function(){
       if( $("#user_name").val().length > 0 ){
-        createCookie("curren_user", $("#user_name").val(), 30);
+        createCookie("current_user", $("#user_name").val(), 30);
         location.reload(true);
       };
     });
@@ -60,7 +60,7 @@ $("document").ready(function() {
       }
     });
 
-    $('#user_name').val(readCookie("curren_user"));
+    $('#user_name').val(readCookie("current_user"));
 
     setTimeout(function() {
       $("#build-link").trigger('click');

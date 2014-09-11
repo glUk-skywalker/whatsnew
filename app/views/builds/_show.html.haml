@@ -25,7 +25,7 @@
               %table
                 - bug[:assignments].each do |assignment|
                   %tr
-                    %td= assignment[:tester] + ' (' + assignment[:assignment] + ')'
+                    %td{ style: @current_user == assignment[:tester] ? "font-weight: bold;" : ""}= assignment[:tester] + ' (' + assignment[:assignment] + ')'
   - else
     No bug found
 

@@ -13,6 +13,7 @@ class BuildsController < ApplicationController
 
   def show
     @build = Build.find(params[:id])
+    @current_user = cookies[:current_user] ? cookies[:current_user] + "@" + Settings.email_server_url : ""
 
     require 'xmlrpc/client'
     require 'openssl'
