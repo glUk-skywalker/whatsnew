@@ -47,8 +47,21 @@ $("document").ready(function() {
       $(this).parent().parent().addClass("selected");
     });
 
+    $("#save_user_button").click(function(){
+      createCookie("curren_user", $("#user_name").val(), 30);
+      location.reload(true);
+    });
+
+    $('#user_name').keyup(function(e){
+      if(e.keyCode == 13) {
+        $("#save_user_button").click();
+      }
+    });
+
+    $('#user_name').val(readCookie("curren_user"));
+
     setTimeout(function() {
-        $("#build-link").trigger('click');
+      $("#build-link").trigger('click');
     },10);
 });
 

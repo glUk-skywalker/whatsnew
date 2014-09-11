@@ -14,7 +14,7 @@
         You are working as
         = text_field_tag "user_name"
         = "@" + Settings.email_server_url
-        = button_tag "Save"
+        = button_tag "Save", id: "save_user_button"
     %main{:role => "main"}
       = render 'layouts/messages'
       = yield
