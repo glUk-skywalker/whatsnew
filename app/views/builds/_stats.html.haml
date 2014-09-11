@@ -26,6 +26,6 @@
     %td= "Not included"
     %td.value= @bugs.find_all{ |bug| !bug[:included] }.length 
   %tr{ title: "NOT IMPLEMENTED!" }
-    %td= check_box_tag "verificator", 1, true, class: "verificator stats-checkbox", disabled: "disabled"
-    %td= "I'm verificator"
+    %td= check_box_tag "verificator", 1, false, class: "verificator stats-checkbox", disabled: "disabled"
+    %td= "My bugs only"
     %td.value= "NULL"

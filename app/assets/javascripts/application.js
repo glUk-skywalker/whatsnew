@@ -96,12 +96,19 @@ $(function() {
         });
       });
 
+      if( readCookie("curren_user").length > 0 ){
+        $("input.verificator").removeAttr("disabled");
+      };
+
       //restore checkboxes form cookies
-      $(".stats-checkbox").each(function() {
+      $(".stats-checkbox").not(".verificator").each(function() {
         if(readCookie("show_" + this.id) == 'false'){
           this.click();
         };
       });
+      if(readCookie("show_verificator") == 'true'){
+        $(".stats-checkbox.verificator").click();
+      };
 
       //apply new status icon in build list
       var build = $(".stats-title td.build-number").text().trim().substr(0, 4);
