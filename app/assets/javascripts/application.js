@@ -88,12 +88,14 @@ $(function() {
         $(".collapse").addClass("in");
         createCookie("show_" + this.id, this.checked, 30)
 
-        $(".stats-checkbox").each(function(){
+        $(".stats-checkbox").not(".verificator").each(function(){
           if( !$(this).is(":checked") ) {
-            $(".collapse." + $(this).attr("id")).removeClass("in");
-            $(".collapse." + $(this).attr("id")).addClass("out");
+            $(".collapse." + $(this).attr("id")).removeClass("in").addClass("out");
           }
         });
+        if( $(".stats-checkbox.verificator").is(":checked") ) {
+          $(".collapse").not(".current-user-bug").removeClass("in").addClass("out");
+        }
       });
 
       if( readCookie("current_user").length > 0 ){

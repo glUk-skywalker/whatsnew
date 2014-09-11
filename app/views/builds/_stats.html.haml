@@ -24,8 +24,8 @@
   %tr{ title: "Last commit in this bug made AFTER build release" }
     %td= check_box_tag "included-false", 1, true, class: "included-false stats-checkbox" 
     %td= "Not included"
-    %td.value= @bugs.find_all{ |bug| !bug[:included] }.length 
-  %tr{ title: "NOT IMPLEMENTED!" }
+    %td.value
+  %tr{ title: "Show ONLY my bugs" }
     %td= check_box_tag "verificator", 1, false, class: "verificator stats-checkbox", disabled: "disabled"
     %td= "My bugs only"
-    %td.value= "NULL"
+    %td.value
