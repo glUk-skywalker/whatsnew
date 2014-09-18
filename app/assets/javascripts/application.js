@@ -48,7 +48,7 @@ $("document").ready(function() {
     });
 
     $("#save_user_button").click(function(){
-      if( $("#user_name").val().length > 0 ){
+      if( $("#user_name").val().length > 0 && $("#user_name").val() != readCookie("current_user") ){
         createCookie("current_user", $("#user_name").val(), 30);
         location.reload(true);
       };
