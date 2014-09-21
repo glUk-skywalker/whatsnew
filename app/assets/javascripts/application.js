@@ -41,6 +41,7 @@ function readCookie(name) {
 
 $("document").ready(function() {
     $(".build-link").click(function(){
+      createCookie("selected_build", this.text, 30);
       $(".build-link").removeClass("selected");
       $(".build-row").removeClass("selected");
       $(this).addClass("selected");
@@ -63,7 +64,14 @@ $("document").ready(function() {
     $('#user_name').val(readCookie("current_user"));
 
     setTimeout(function() {
-      $("#build-link").trigger('click');
+      //var selected_build = readCookie("selected_build");
+      //alert("build: " + selected_build.length);
+      if( readCookie("selected_build") != null ){
+        $('a:contains("' + readCookie("selected_build") + '")').click();
+      }
+      else{
+        $("#build-link").trigger('click');
+      };
     },10);
 });
 
@@ -98,7 +106,7 @@ $(function() {
         }
       });
 
-      if( readCookie("current_user").length > 0 ){
+      if( readCookie("current_user") != null ){
         $("input.verificator").removeAttr("disabled");
       };
 
