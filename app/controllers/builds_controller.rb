@@ -20,13 +20,13 @@ class BuildsController < ApplicationController
 
     server = XMLRPC::Client.new2("#{ Settings.bugzilla_url }/xmlrpc.cgi")
     server.instance_variable_get(:@http).instance_variable_set(:@verify_mode, OpenSSL::SSL::VERIFY_NONE)
-    user = server.proxy('User')
-    user.login({ 'login' => Settings.bugzilla.login, 'password' => Settings.bugzilla.password })
+#    user = server.proxy('User')
+#    user.login({ 'login' => Settings.bugzilla.login, 'password' => Settings.bugzilla.password })
 
     bug = server.proxy 'Bug'
 
     last_commits = {}
-    bug.history(ids: @build.bug_list.split(','))['bugs'].each do |bug_history|
+    bug.history(ids: @build.bug_list.split(','), Bugzilla_login: Settings.bugzilla.login, Bugzilla_password: Settings.bugzilla.password)['bugs'].each do |bug_history|
       date = time = nil
       (0..(bug_history['history'].length - 1)).reverse_each.each do |i|
         if reporev_changed?(bug_history['history'][i])
@@ -42,7 +42,7 @@ class BuildsController < ApplicationController
 
 
     @bugs = []
-    bug.get(ids: @build.bug_list.split(','))['bugs'].each do |bug|
+    bug.get(ids: @build.bug_list.split(','), Bugzilla_login: Settings.bugzilla.login, Bugzilla_password: Settings.bugzilla.password)['bugs'].each do |bug|
       assignments = []
       Settings.testers.each do |tester|
         assignment = []
