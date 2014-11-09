@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 1.2'
 
 group :development do
   gem 'rails_layout'
+  gem 'capistrano', '~> 3.2.1'
 end
 
 group :doc do
