@@ -123,5 +123,8 @@ $(function() {
       //apply new status icon in build list
       var build = $(".stats-title td.build-number").text().trim().substr(0, 4);
       $(".build-row." + build + " img").attr("src", "/assets/" + $("#large-status-icon").attr("class") + ".png").hide().show();
+    })
+    .ajaxError(function(){
+      $('#loading-indicator').replaceWith("<div style='margin-left: -200px'>WHOOPS!! Looks like something went wrong. :( <br><a href='javascript:history.go(0)'><b>Try again</b></a> later, please.</div>");
     });
 });
