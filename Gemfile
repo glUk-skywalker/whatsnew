@@ -32,6 +32,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'capistrano-puma'
+gem 'capistrano-bundler'
 
 group :development do
   gem 'rails_layout'
