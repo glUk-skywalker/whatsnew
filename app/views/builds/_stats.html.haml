@@ -25,7 +25,7 @@
     %td= check_box_tag "included-false", 1, true, class: "included-false stats-checkbox" 
     %td= "Not included"
     %td.value
-  %tr{ title: "Show my bugs ONLY" }
-    %td= check_box_tag "verificator", 1, false, class: "verificator stats-checkbox", disabled: "disabled"
+  %tr{ title: "Show my bugs ONLY", hidden: current_user.tester? ? false : 'hidden' }
+    %td= check_box_tag "verificator", 1, false, class: "verificator stats-checkbox"
     %td= "My bugs only"
     %td.value

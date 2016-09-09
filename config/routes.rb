@@ -3,6 +3,12 @@ Whatsnew::Application.routes.draw do
 
   root to: 'builds#index'
   get '/check/:tag', to: 'builds#check', as: 'check_build'
+
+  match 'signin', to: 'sessions#new', via: :get, as: 'sign_in'
+  match 'signout', to: 'sessions#destroy', via: :get, as: 'sign_out'
+  match 'auth/:provider/callback', to: 'sessions#create', via: :get
+  match 'auth/failure', to: 'sessions#failure', via: :get
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

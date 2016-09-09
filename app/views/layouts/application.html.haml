@@ -11,10 +11,8 @@
     %header
       /= render 'layouts/navigation'
       #my-navigation
-        You are working as
-        = text_field_tag "user_name"
-        = "@" + Settings.email_server_url
-        = button_tag "Save", id: "save_user_button"
+        = current_user.name
+        = link_to content_tag(:i, nil, class: 'glyphicon glyphicon-log-in'), sign_out_path, title: "Log out"
     %main{:role => "main"}
       = render 'layouts/messages'
       = yield

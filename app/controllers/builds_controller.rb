@@ -1,6 +1,6 @@
-class BuildsController < ApplicationController
+class BuildsController < AuthenticatedUserController
   include BuildsHelper
-  
+
   def index
     @builds = Build.order('whatsnew_time DESC')
   end
@@ -13,15 +13,12 @@ class BuildsController < ApplicationController
 
   def show
     @build = Build.find(params[:id])
-    @current_user = cookies[:current_user] ? cookies[:current_user] + "@" + Settings.email_server_url : ""
 
     require 'xmlrpc/client'
     require 'openssl'
 
     server = XMLRPC::Client.new2("#{ Settings.bugzilla_url }/xmlrpc.cgi")
     server.instance_variable_get(:@http).instance_variable_set(:@verify_mode, OpenSSL::SSL::VERIFY_NONE)
-#    user = server.proxy('User')
-#    user.login({ 'login' => Settings.bugzilla.login, 'password' => Settings.bugzilla.password })
 
     bug = server.proxy 'Bug'
 
@@ -71,7 +68,8 @@ class BuildsController < ApplicationController
     @build.update_attributes(processed: processed)
 
     respond_to do |format|
-      format.js
+      format.js { authenticated? }
+      format.html { redirect_to root_path }
     end
   end
 

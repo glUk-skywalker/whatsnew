@@ -48,21 +48,6 @@ $("document").ready(function() {
       $(this).parent().parent().addClass("selected");
     });
 
-    $("#save_user_button").click(function(){
-      if( $("#user_name").val().length > 0 && $("#user_name").val() != readCookie("current_user") ){
-        createCookie("current_user", $("#user_name").val(), 30);
-        location.reload(true);
-      };
-    });
-
-    $('#user_name').keyup(function(e){
-      if(e.keyCode == 13) {
-        $("#save_user_button").click();
-      }
-    });
-
-    $('#user_name').val(readCookie("current_user"));
-
     setTimeout(function() {
       //var selected_build = readCookie("selected_build");
       //alert("build: " + selected_build.length);
@@ -78,7 +63,7 @@ $("document").ready(function() {
 $(function() {
   $('#loading-indicator').hide();  // hide it initially.
   $('#build-info').show();
-  $(document)  
+  $(document)
     .ajaxStart(function() {
       $('#loading-indicator').show(); // show on any Ajax event.
       $('#build-info').hide();
@@ -105,10 +90,6 @@ $(function() {
           $(".collapse").not(".current-user-bug").removeClass("in").addClass("out");
         }
       });
-
-      if( readCookie("current_user") != null ){
-        $("input.verificator").removeAttr("disabled");
-      };
 
       //restore checkboxes form cookies
       $(".stats-checkbox").not(".verificator").each(function() {
