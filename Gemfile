@@ -34,6 +34,8 @@ gem 'jbuilder', '~> 1.2'
 gem 'omniauth'
 gem 'omniauth-ldap', git: "git://github.com/kolo/omniauth-ldap.git"
 
+gem 'puma', '~> 3.4'
+
 group :development do
   gem 'rails_layout'
   gem 'capistrano-rails', '~> 1.1'
