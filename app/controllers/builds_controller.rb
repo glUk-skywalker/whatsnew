@@ -43,9 +43,9 @@ class BuildsController < AuthenticatedUserController
       assignments = []
       Settings.testers.each do |tester|
         assignment = []
-        assignment  << 'creator' if bug['creator'].include? tester
+        assignment  << 'creator' if bug['creator'] == tester
         assignment << 'CC' if bug['cc'].include? tester
-        assignment << 'qa contact' if bug['qa_contact'].include? tester
+        assignment << 'qa contact' if bug['qa_contact'] == tester
 
         if !assignment.empty?
           assignments << { tester: tester, assignment: assignment.join(', ') }
