@@ -12,7 +12,7 @@
       /= render 'layouts/navigation'
       #my-navigation
         = current_user.name
-        = link_to content_tag(:i, nil, class: 'glyphicon glyphicon-log-in'), sign_out_path, title: "Log out"
+        = link_to content_tag(:i, nil, class: 'glyphicon glyphicon-log-out'), sign_out_path, title: "Log out"
     %main{:role => "main"}
       = render 'layouts/messages'
       = yield
