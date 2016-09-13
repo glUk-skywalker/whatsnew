@@ -35,11 +35,15 @@ gem 'omniauth'
 gem 'omniauth-ldap', git: "git://github.com/kolo/omniauth-ldap.git"
 
 gem 'puma', '~> 3.4'
+gem 'js_assets'
 
 group :development do
   gem 'rails_layout'
-  gem 'capistrano-rails', '~> 1.1'
-  gem 'capistrano-rvm'
+  gem 'capistrano-rvm',     require: false
+  gem 'capistrano',         require: false
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano3-puma',   require: false
 end
 
 group :doc do

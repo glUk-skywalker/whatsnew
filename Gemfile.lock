@@ -54,6 +54,9 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    capistrano3-puma (1.2.1)
+      capistrano (~> 3.0)
+      puma (>= 2.6)
     chronic (0.10.2)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -75,6 +78,9 @@ GEM
     jquery-rails (3.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    js_assets (0.0.10)
+      rails
+      sprockets (~> 2.0)
     json (1.8.3)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -155,12 +161,16 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass (~> 3.0.3.0)
-  capistrano-rails (~> 1.1)
+  capistrano
+  capistrano-bundler
+  capistrano-rails
   capistrano-rvm
+  capistrano3-puma
   coffee-rails (~> 4.0.0)
   haml (= 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails
+  js_assets
   mysql2 (~> 0.3.14)
   omniauth
   omniauth-ldap!
