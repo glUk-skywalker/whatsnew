@@ -10,7 +10,7 @@
             %table.builds-table
               %tr.build-row{ class: build.number }
                 %td{ width: 22 }
-                  = image_tag !build.processed ? "not_fully_processed.png" : "processed.png"
+                  = image_tag !build.processed ? asset_path("not_fully_processed.png") : asset_path("processed.png")
                 %td{ width: 35 }
                   = link_to build.number, build, remote: true, id: 'build-link', class: 'build-link'
                 %td{ width: 45 }
