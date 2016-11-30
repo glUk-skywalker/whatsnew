@@ -11,7 +11,7 @@
         %th
           Verificators
       - @bugs.each do |bug|
-        %tr.bug-row.collapse.in{ bgcolor: { 'VERIFIED' => '#67E46F', 'TO-VERIFY' => '#6C8CD5', 'REOPENED' => '#FF7373', 'CLOSED' => '#848181' }[bug[:status]], class: bug[:status].downcase + " " + "included-#{ bug[:included].to_s } " + (bug[:assignments].map{ |assignment| assignment[:tester] }.include?(current_user.email) ? "current-user-bug" : ""), title: bug[:included] ? "" : "Last commit in this bug made AFTER build release" }
+        %tr.bug-row.collapse.in{ bgcolor: { 'DOCUMENTED' => '#67E46F', 'VERIFIED' => '#67E46F', 'TO-DOCUMENT' => '#67E46F', 'TO-VERIFY' => '#6C8CD5', 'REOPENED' => '#FF7373', 'CLOSED' => '#848181' }[bug[:status]], class: bug[:status].downcase + " " + "included-#{ bug[:included].to_s } " + (bug[:assignments].map{ |assignment| assignment[:tester] }.include?(current_user.email) ? "current-user-bug" : ""), title: bug[:included] ? "" : "Last commit in this bug made AFTER build release" }
           %td{ style: "vertical-align: middle; width: 65px", bgcolor: "white" }
             .bug-link-container
               %font
