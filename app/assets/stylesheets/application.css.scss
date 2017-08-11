@@ -12,7 +12,7 @@
  *= require_tree .
  */
 
-@import url('http://getbootstrap.com/dist/css/bootstrap.css');
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
 
 .build-row {
   &.selected {
@@ -74,20 +74,20 @@ $closed_color: #848181;
 #stats-container {
   height: 270px;
   table.stats-title{
-    td { 
+    td {
       padding: 2px 4px 2px 4px;
 
       &.build-number {
         width: 130px;
       }
 
-      &.refresh { 
+      &.refresh {
         text-align: right;
       }
     }
   }
 
-  td.status { 
+  td.status {
     font-weight: bold;
     width: 120px;
   }
