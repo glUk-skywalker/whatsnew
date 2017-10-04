@@ -72,7 +72,7 @@ $reopened_color: #FF7373;
 $closed_color: #848181;
 
 #stats-container {
-  height: 270px;
+  height: 310px;
   table.stats-title{
     td {
       padding: 2px 4px 2px 4px;
@@ -89,10 +89,12 @@ $closed_color: #848181;
 
   td.status {
     font-weight: bold;
-    width: 120px;
+    width: 140px;
   }
   td.verified { background-color: $verified_color; }
   td.to-verify { background-color: $to-verify_color; }
+  td.to-document { background-color: $to-verify_color; }
+  td.documented { background-color: $verified_color; }
   td.reopened { background-color: $reopened_color; }
   td.closed { background-color: $closed_color; }
 

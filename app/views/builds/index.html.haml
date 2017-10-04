@@ -4,7 +4,7 @@
     %td{ style: "width: 200px;", valign: "top" }
       #stats-container
         #stats-subcontainer
-      .build-list{ style: "height: 430px; overflow: auto" }
+      .build-list{ style: "height: 390px; overflow: auto" }
         - if !@builds.empty?
           - @builds.each do |build|
             %table.builds-table
@@ -15,7 +15,7 @@
                   = link_to build.number, build, remote: true, id: 'build-link', class: 'build-link'
                 %td{ width: 45 }
                   = '(' + build.tag + ')'
-                %td{ width: 78 } 
+                %td{ width: 78 }
                   = build.whatsnew_time.to_s[0..10]
     %td{ align: "center", valign: "top" }
       #loading-indicator{ style: "margin-left: -200px" }

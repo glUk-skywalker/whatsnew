@@ -31,7 +31,7 @@ class BuildsController < AuthenticatedUserController
           time ||= bug_history['history'][i]['when'].to_time
         end
       end
-      
+
       if !date.nil?
         last_commits[ bug_history['id'] ] = DateTime.new(date.year, date.month, date.day, time.hour, time.min, time.sec)
       end
@@ -63,7 +63,7 @@ class BuildsController < AuthenticatedUserController
 
     processed = true
     @bugs.each do |bug|
-      processed = false if (bug[:status] == "RESOLVED" || bug[:status] == "TO-VERIFY") && bug[:included]
+      processed = false if (bug[:status] == "RESOLVED" || bug[:status] == "TO-VERIFY" || bug[:status] == "TO-DOCUMENT") && bug[:included]
     end
     @build.update_attributes(processed: processed)
 
