@@ -17,6 +17,7 @@
               %font
                 = link_to bug[:id], Settings.bugzilla_url + '/show_bug.cgi?id=' + bug[:id].to_s, target: '_blank'
           %td{ style: "vertical-align:middle;" }
+            %b= "[" + bug[:product] + "] "
             = bug[:summary]
           %td{ style: "vertical-align: middle; width: 125px; align: center" }
             %strong= bug[:status]
@@ -28,4 +29,3 @@
                     %td{ style: current_user.email == assignment[:tester] ? "font-weight: bold;" : "" }= assignment[:tester] + ' (' + assignment[:assignment] + ')'
   - else
     No bug found
-
