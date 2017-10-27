@@ -58,7 +58,9 @@ class BuildsController < AuthenticatedUserController
         @build.whatsnew_time > last_commits[bug['id']] ? included = true : included = false
       end
 
-      @bugs << { id: bug['id'], summary: bug['summary'], status: bug['status'], assignments: assignments, included: included, product: bug['product'] }
+      unless bug['status'] == 'NEW'
+        @bugs << { id: bug['id'], summary: bug['summary'], status: bug['status'], assignments: assignments, included: included, product: bug['product'] }
+      end
     end
 
     processed = true
