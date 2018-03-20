@@ -53,11 +53,14 @@ $("document").ready(function() {
       //var selected_build = readCookie("selected_build");
       //alert("build: " + selected_build.length);
       if( readCookie("selected_build") != null ){
-        $('a:contains("' + readCookie("selected_build") + '")').click();
+        var build_link = $('a:contains(' + readCookie("selected_build") + ')')
+        if(build_link.length){
+          build_link.click();
+          return;
+        }
       }
-      else{
-        $("#build-link").trigger('click');
-      };
+
+      $("#build-link").trigger('click');
     },10);
 });
 
