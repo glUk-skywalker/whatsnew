@@ -9,14 +9,16 @@ class WhatsnewDownloader
 
     Net::HTTP.start("www.polyanalyst.com") { |http|
       whatsnew_time = http.head("/paupdate/#{ tag }/whatsnew.txt")['last-modified']
+      whatsnew_time = Time.parse whatsnew_time
       content = http.get("/paupdate/#{ tag }/whatsnew.txt").body
     }
 
-    new(whatsnew_time, content)
+    new(whatsnew_time, tag, content)
   end
 
-  def initialize(whatsnew_time, content)
+  def initialize(whatsnew_time, branch, content)
     @whatsnew_time = whatsnew_time
+    @branch = branch
     @content = content
   end
 
@@ -34,16 +36,23 @@ class WhatsnewDownloader
       begin
         builds_info << {
           number: b[/Build:  6.[0.5].\d+/].split('.').last,
-          bugs: b.scan(/\n#\d+/).join(',').gsub("\n#", ''),
-          tasks: b.scan(/\nT\d+/).join(',').gsub("\n", ''),
-          date: DateTime.strptime(b[date_mask].split('   ').last.insert(-3, '20'), '%m/%d/%Y')
+          bug_list: b.scan(/\n#\d+/).join(',').gsub("\n#", ''),
+          task_list: b.scan(/\nT\d+/).join(',').gsub("\n", ''),
+          whatsnew_time: normalize_date(b[date_mask].split('   ').last),
+          tag: @branch
         }
-      rescue
+      rescue ArgumentError
       end
     }
 
-    builds_info.first[:date] = @whatsnew_time
+    builds_info.first[:whatsnew_time] = @whatsnew_time
     builds_info
+  end
+
+  private
+
+  def normalize_date(date_str)
+    Time.strptime(date_str.insert(-3, '20'), '%m/%d/%Y')
   end
 
 end
