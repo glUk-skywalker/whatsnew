@@ -8,8 +8,8 @@ class WhatsnewDownloader
     whatsnew_time, content = nil
 
     Net::HTTP.start("www.polyanalyst.com") { |http|
-      whatsnew_time = http.head("/paupdate/beta/whatsnew.txt")['last-modified']
-      content = http.get("/paupdate/beta/whatsnew.txt").body
+      whatsnew_time = http.head("/paupdate/#{ tag }/whatsnew.txt")['last-modified']
+      content = http.get("/paupdate/#{ tag }/whatsnew.txt").body
     }
 
     new(whatsnew_time, content)
