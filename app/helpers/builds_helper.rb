@@ -12,8 +12,12 @@ module BuildsHelper
     new_build_number = open("#{ Settings.updates_url }/#{ tag }/buildno.txt").read
 
     if !Build.any? || Build.find_by(number: new_build_number).nil?
-      build_bugs = open("#{ Settings.updates_url }/#{ tag }/whatsnew.txt").read.split("Bugs Resolved:")[1].scan(/\n#\d+/).map{ |e| e[2..-1] }.join(",")
-      Build.create(number: new_build_number, tag: tag, bug_list: build_bugs, whatsnew_time: whatsnew_time)
+      content = open("#{ Settings.updates_url }/#{ tag }/whatsnew.txt").read
+      build_info = content.split(/Build:  6.[0,5].\d+/)[1]
+      bugs_n_tasks = build_info.scan(/\n[#,T]\d+/).map{ |b| b[1..-1] }
+      bugs = bugs_n_tasks.select{ |b| b[0] == '#' }.map{ |b| b[1..-1] }.join(',')
+
+      Build.create(number: new_build_number, tag: tag, bug_list: bugs, whatsnew_time: whatsnew_time)
     end
 
     config = Rails.configuration.database_configuration
