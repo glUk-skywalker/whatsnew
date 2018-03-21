@@ -29,7 +29,6 @@ class BugzillaRestClient
 
   def get(url, params)
     params[:token] = @token
-    puts params
     resp = RestClient.get BASE_URL + '/rest.cgi' + url, { params: params }
     JSON.parse resp.body
   end
