@@ -12,9 +12,35 @@ class BugzillaClient
     }
   end
 
+  def self.get_bugs_history_restapi(bugs_list)
+    bugs_history = []
+    bugs_list.split(',').each{ |b|
+      bugs_history << get("/bug/#{ b }/history")
+    }
+    bugs_history
+  end
+
+  def self.get_bugs_history_xmlrpc(bugs_list)
+    require 'xmlrpc/client'
+    require 'openssl'
+
+    server = XMLRPC::Client.new2("#{ Settings.bugzilla_url }/xmlrpc.cgi")
+    server.instance_variable_get(:@http).instance_variable_set(:@verify_mode, OpenSSL::SSL::VERIFY_NONE)
+
+    bug = server.proxy 'Bug'
+
+    params = {
+      ids: bugs_list.split(','),
+      Bugzilla_login: CREDENTIALS[:login],
+      Bugzilla_password: CREDENTIALS[:password]
+    }
+
+    bug.history(params)['bugs']
+  end
+
   private
 
-  def self.get(url, params)
+  def self.get(url, params = {})
     params.merge! CREDENTIALS
     resp = RestClient.get BASE_URL + '/rest.cgi' + url, { params: params }
     JSON.parse resp.body
