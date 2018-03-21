@@ -1,4 +1,4 @@
-class BugzillaRestClient
+class BugzillaClient
 
   BASE_URL = Settings.bugzilla_url
   CREDENTIALS =  {
