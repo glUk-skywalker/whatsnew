@@ -12,6 +12,12 @@ class BugzillaClient
     }
   end
 
+  def self.get_bugs_history(bugs_list)
+    get_bugs_history_xmlrpc(bugs_list).map{ |b| b.slice("id", "history") }
+  end
+
+  private
+
   def self.get_bugs_history_restapi(bugs_list)
     bugs_history = []
     bugs_list.split(',').each{ |b|
@@ -37,8 +43,6 @@ class BugzillaClient
 
     bug.history(params)['bugs']
   end
-
-  private
 
   def self.get(url, params = {})
     params.merge! CREDENTIALS
