@@ -1,7 +1,7 @@
 module BuildsHelper
 
   def check_build(tag)
-    last_build = WhatsnewDownloader.get_for('beta').parsed.first
+    last_build = WhatsnewDownloader.get_for(tag).parsed.first
     Build.create(last_build) unless Build.find_by_number(last_build[:number])
 
     config = Rails.configuration.database_configuration
