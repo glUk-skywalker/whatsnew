@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140820150259) do
+ActiveRecord::Schema.define(version: 20180320105232) do
 
   create_table "builds", force: true do |t|
     t.string   "number"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140820150259) do
     t.text     "bug_list"
     t.datetime "whatsnew_time"
     t.boolean  "processed",     default: false
+    t.string   "task_list"
   end
 
 end
