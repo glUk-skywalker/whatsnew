@@ -14,16 +14,11 @@ namespace :check do
 	  puts DateTime.now.to_s + ' checking beta finished'
 	end
 
-  task :populate => :environment do
-    require 'open-uri'
-
-    build_bugs = open("#{ Settings.updates_url }/main/whatsnew.txt").read.split('Date:   ')[1..-1].each do |build_info|
-      number = build_info.scan(/Build:  6\.\d\.\d+/)[0].split('.').last
-      whatsnew_time = DateTime.strptime(build_info.scan(/\d{1,2}\/\d{1,2}\/\d{1,2}/)[0].insert(-3, '20'), '%m/%d/%Y')
-      build_bugs = build_info.scan(/\n#\d+/).map{ |e| e[1..-1] }.join(",")
-      tag = "main"
-
-      Build.create(number: number, tag: tag, bug_list: build_bugs, whatsnew_time: whatsnew_time)
-    end
+	task :populate => :environment do
+		builds = WhatsnewDownloader.get_for('main').parsed
+		# builds += WhatsnewDownloader.get_for('beta').parsed
+		builds.each{ |build|
+			Build.create(build) unless Build.find_by_number(build[:number])
+		}
   end
 end
