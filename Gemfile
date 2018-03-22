@@ -31,7 +31,7 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-gem 'omniauth'
+gem 'omniauth', '~> 1.3.2'
 gem 'omniauth-ldap', git: "git://github.com/kolo/omniauth-ldap.git"
 
 gem 'puma', '~> 3.4'
