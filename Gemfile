@@ -37,6 +37,8 @@ gem 'omniauth-ldap', git: "git://github.com/kolo/omniauth-ldap.git"
 gem 'puma', '~> 3.4'
 gem 'js_assets'
 
+gem 'rest-client', '~> 2.0', '>= 2.0.2'
+
 group :development do
   gem 'rails_layout'
   gem 'capistrano-rvm',     require: false
@@ -44,6 +46,8 @@ group :development do
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma',   require: false
+
+  gem 'highline', '~> 1.7', '>= 1.7.8'                                          # needed to suppress echoing symbols during input the password on deployment
 end
 
 group :doc do
