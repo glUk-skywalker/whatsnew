@@ -16,11 +16,11 @@
     %tr{ class: status.downcase + "-row" }
       %td= check_box_tag status.downcase, 1, true, class: status.downcase + " stats-checkbox"
       %td.status{ class: status.downcase }= status
-      %td.value= @bugs.find_all{ |bug| bug[:status] == status }.length
+      %td.value= @build.bugs_info.find_all{ |bug| bug[:status] == status }.length
   %tr
     %td
     %td= "TOTAL"
-    %td.value= @bugs.length
+    %td.value= @build.bugs_info.length
   %tr{ title: "Show/Hide bugs, which got new commits after build release" }
     %td= check_box_tag "included-false", 1, true, class: "included-false stats-checkbox"
     %td= "Not included"
