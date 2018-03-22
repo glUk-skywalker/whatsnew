@@ -12,7 +12,7 @@ class BuildsController < AuthenticatedUserController
     not_processed_bugs = @build.bugs_info.select{ |b|
       b[:status].in?(NOT_PROCESSED_BUG_STATUSES) && b[:included]
     }
-    @build.update_attributes(processed: true) if not_processed_bugs.empty?
+    @build.update_attributes(processed: not_processed_bugs.empty?)
 
     respond_to do |format|
       format.js { authenticated? }
