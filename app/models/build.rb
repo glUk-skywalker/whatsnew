@@ -28,6 +28,6 @@ class Build < ActiveRecord::Base
   private
 
   def task_ids
-    task_list.split(',').map{ |t| t[1..-1]}
+    task_list.to_s.split(',').map{ |t| t[1..-1]}
   end
 end
