@@ -1,5 +1,4 @@
 class Build < ActiveRecord::Base
-
   def bugs_info
     return @bugs_info if @bugs_info                                             # avoid extra requests if information exists
     bugs = BugzillaClient.get_bugs bug_list
@@ -9,4 +8,11 @@ class Build < ActiveRecord::Base
     @bugs_info.delete_if{ |b| b[:status] == 'NEW' }                             # filtering out the bugs that aren't fixed
   end
 
+  def bugs?
+    bug_list.split(',').any?
+  end
+
+  def tasks?
+    task_list.split(',').any?
+  end
 end
