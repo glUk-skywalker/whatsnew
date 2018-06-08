@@ -1,5 +1,4 @@
 class Bug
-
   def initialize(info)
     @info = info
 
@@ -31,26 +30,20 @@ class Bug
       relation << 'CC' if @info[:cc].include? tester
       relation << 'qa contact' if @info[:qa_contact] == tester
 
-      unless relation.empty?
-        relations << {
-          tester: tester,
-          relation: relation.join(', ')
-        }
-      end
+      next if relation.empty?
+      relations << { tester: tester, relation: relation.join(', ') }
     end
     @info[:relations] = relations
   end
 
   def last_commit_time
-    commits_history = @info[:history].select{ |event|                           # filtering out inessential items
+    # filtering out inessential items
+    commits_history = @info[:history].select{ |event|
       event[:changes].any?{ |c|
-        c.has_value?('cf_reporev') || c.has_value?('whiteboard')
+        c.value?('cf_reporev') || c.value?('whiteboard')
       }
     }
-
     return nil unless commits_history.any?
-
-    commits_history.sort{ |a, b| b[:when].to_time <=> a[:when].to_time }.first[:when].to_time
+    commits_history.min{ |a, b| b[:when].to_time <=> a[:when].to_time }[:when].to_time
   end
-
 end
