@@ -3,6 +3,7 @@ class Bug
     @info = info
 
     @info.total_symbolize_keys!
+    @info[:kind] = 'bug'
     adjust_tester_relations!
   end
 
