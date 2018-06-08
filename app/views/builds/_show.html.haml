@@ -1,5 +1,5 @@
 .bug-list{ style: "width: 99%; height: 680px; overflow: auto" }
-  - if @build.bugs_info.any?
+  - if @build.issues_info.any?
     %table.table.table-bordered.bugs-table{ style: "width: 99.9%;" }
       %tr
         %th{ bgcolor: "white" }
@@ -10,26 +10,48 @@
           Status
         %th
           Verificators
-      - @build.bugs_info.each do |bug|
-        %tr.bug-row.collapse.in{ bgcolor: { 'DOCUMENTED' => '#67E46F', 'VERIFIED' => '#67E46F', 'TO-DOCUMENT' => '#6C8CD5', 'TO-VERIFY' => '#6C8CD5', 'REOPENED' => '#FF7373', 'CLOSED' => '#848181' }[bug[:status]], class: bug[:status].downcase + " " + "included-#{ bug[:included].to_s } " + (bug[:relations].map{ |relation| relation[:tester] }.include?(current_user.email) ? "current-user-bug" : ""), title: bug[:included] ? "" : "Last commit in this bug made AFTER build release" }
-          %td{ style: "vertical-align: middle; width: 65px", bgcolor: "white" }
-            .bug-link-container
-              %font
-                = link_to bug[:id], Settings.bugzilla_url + '/show_bug.cgi?id=' + bug[:id].to_s, target: '_blank'
-          %td{ style: "vertical-align:middle;" }
-            %table
-              %tr
-                %td{ width: '55px' }
-                  %b= "[" + bug[:product] + "] "
-                %td
-                  = bug[:summary]
-          %td{ style: "vertical-align: middle; width: 125px; align: center" }
-            %strong= bug[:status]
-          %td{ style: "vertical-align: middle; width: 350px" }
-            - if !bug[:relations].empty?
+      - @build.issues_info.each do |bug|
+        - if bug[:kind] == 'bug'
+          %tr.bug-row.collapse.in{ bgcolor: { 'DOCUMENTED' => '#67E46F', 'VERIFIED' => '#67E46F', 'TO-DOCUMENT' => '#6C8CD5', 'TO-VERIFY' => '#6C8CD5', 'REOPENED' => '#FF7373', 'CLOSED' => '#848181' }[bug[:status]], class: bug[:status].downcase + " " + "included-#{ bug[:included].to_s } " + (bug[:relations].map{ |relation| relation[:tester] }.include?(current_user.email) ? "current-user-bug" : ""), title: bug[:included] ? "" : "Last commit in this bug made AFTER build release" }
+            %td{ style: "vertical-align: middle; width: 65px", bgcolor: "white" }
+              .bug-link-container
+                %font
+                  = link_to bug[:id], Settings.bugzilla_url + '/show_bug.cgi?id=' + bug[:id].to_s, target: '_blank'
+            %td{ style: "vertical-align:middle;" }
               %table
-                - bug[:relations].each do |relation|
-                  %tr
-                    %td{ style: current_user.email == relation[:tester] ? "font-weight: bold;" : "" }= relation[:tester] + ' (' + relation[:relation] + ')'
+                %tr
+                  %td{ width: '55px' }
+                    %b= "[" + bug[:product] + "] "
+                  %td
+                    = bug[:summary]
+            %td{ style: "vertical-align: middle; width: 125px; align: center" }
+              %strong= bug[:status]
+            %td{ style: "vertical-align: middle; width: 350px" }
+              - if !bug[:relations].empty?
+                %table
+                  - bug[:relations].each do |relation|
+                    %tr
+                      %td{ style: current_user.email == relation[:tester] ? "font-weight: bold;" : "" }= relation[:tester] + ' (' + relation[:relation] + ')'
+        -else
+          %tr.bug-row.collapse.in{ bgcolor: { 'DOCUMENTED' => '#67E46F', 'VERIFIED' => '#67E46F', 'TO-DOCUMENT' => '#6C8CD5', 'TO-VERIFY' => '#6C8CD5', 'REOPENED' => '#FF7373', 'CLOSED' => '#848181' }[bug[:status]] }
+            %td{ style: "vertical-align: middle; width: 65px", bgcolor: "white" }
+              .bug-link-container
+                %font
+                  = link_to 'T' + bug[:id].to_s, Settings.phabricator.url + '/T' + bug[:id].to_s, target: '_blank'
+            %td{ style: "vertical-align:middle;" }
+              %table
+                %tr
+                  %td{ width: '55px' }
+                    %b= "[" + bug[:product] + "] "
+                  %td
+                    = bug[:summary]
+            %td{ style: "vertical-align: middle; width: 125px; align: center" }
+              %strong= bug[:status]
+            %td{ style: "vertical-align: middle; width: 350px" }
+              -# - if !bug[:relations].empty?
+              -#   %table
+              -#     - bug[:relations].each do |relation|
+              -#       %tr
+              -#         %td{ style: current_user.email == relation[:tester] ? "font-weight: bold;" : "" }= relation[:tester] + ' (' + relation[:relation] + ')'
   - else
     No bug found

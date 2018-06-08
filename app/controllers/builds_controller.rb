@@ -8,7 +8,7 @@ class BuildsController < AuthenticatedUserController
   def show
     @build = Build.find(params[:id])
 
-    not_processed_bugs = @build.bugs_info.select{ |b|
+    not_processed_bugs = @build.issues_info.select{ |b|
       b[:status].in?(NOT_PROCESSED_BUG_STATUSES) && b[:included]
     }
     @build.update_attributes(processed: not_processed_bugs.empty?)
