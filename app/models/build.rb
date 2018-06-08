@@ -8,11 +8,26 @@ class Build < ActiveRecord::Base
     @bugs_info.delete_if{ |b| b[:status] == 'NEW' }                             # filtering out the bugs that aren't fixed
   end
 
+  def tasks_info
+    return @tasks_info if @tasks_info
+    @tasks_info = PhabricatorClient.get_tasks(task_ids).map(&:to_h)
+  end
+
+  def issues_info
+    bugs_info + tasks_info
+  end
+
   def bugs?
     bug_list.split(',').any?
   end
 
   def tasks?
     task_list.split(',').any?
+  end
+
+  private
+
+  def task_ids
+    task_list.split(',').map{ |t| t[1..-1]}
   end
 end
