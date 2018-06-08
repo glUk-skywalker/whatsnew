@@ -25,7 +25,7 @@ class PhabricatorClient
         task[:creator] = t['fields']['authorPHID']
         task[:cc] = ['TODO']
         task[:qa_contact] = 'TODO'
-        task[:PRODUCT] = 'TODO'
+        task[:product] = 'TODO'
         hash_content << task
       end
 
