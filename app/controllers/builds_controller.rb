@@ -1,6 +1,5 @@
 class BuildsController < AuthenticatedUserController
-
-  NOT_PROCESSED_BUG_STATUSES = %w(RESOLVED TO-VERIFY TO-DOCUMENT")
+  NOT_PROCESSED_BUG_STATUSES = %w[RESOLVED TO-VERIFY TO-DOCUMENT].freeze
 
   def index
     @builds = Build.order('whatsnew_time DESC')
@@ -19,5 +18,4 @@ class BuildsController < AuthenticatedUserController
       format.html { redirect_to root_path }
     end
   end
-
 end
