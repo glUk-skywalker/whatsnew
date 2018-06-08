@@ -7,6 +7,7 @@ class PhabricatorClient
   }.freeze
 
   def self.get_tasks(task_list)
+    return [] if task_list.empty?
     next_page = true
     hash_content = []
 
