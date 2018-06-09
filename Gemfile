@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.5.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', "~> 4.2.7.1"
+gem 'rails', '~> 4.2.10'
 
 # Use mysql as the database for Active Record
 gem "mysql2", "~> 0.3.14"
@@ -11,6 +11,7 @@ gem 'haml', '4.0.0'
 gem 'bootstrap-sass', "~> 3.0.3.0"
 gem "rails_config", "~> 0.3.3"
 gem "whenever", "~> 0.9.0"
+gem 'xmlrpc'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
