@@ -11,7 +11,7 @@ class PhabricatorClient
     next_page = true
     hash_content = []
 
-    params = { constraints: { ids: task_list } }
+    params = { constraints: { ids: task_list, statuses: ['testing'] } }
     loop do
       url = "#{BASE_URL}/api/maniphest.search?api.token=#{TOKEN}&#{params.to_query}"
       uri = URI(url)
@@ -27,6 +27,7 @@ class PhabricatorClient
         task[:cc] = ['TODO']
         task[:qa_contact] = 'TODO'
         task[:product] = 'TODO'
+        task[:relations] = []
         hash_content << task
       end
 
