@@ -11,17 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320105232) do
+ActiveRecord::Schema.define(version: 20180712073528) do
 
-  create_table "builds", force: true do |t|
-    t.string   "number"
-    t.string   "tag"
+  create_table "builds", force: :cascade do |t|
+    t.string   "number",        limit: 255
+    t.string   "tag",           limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "bug_list"
+    t.text     "bug_list",      limit: 65535
     t.datetime "whatsnew_time"
-    t.boolean  "processed",     default: false
-    t.string   "task_list"
+    t.boolean  "processed",                   default: false
+    t.string   "task_list",     limit: 255
+  end
+
+  create_table "testers", force: :cascade do |t|
+    t.string   "first_name", limit: 255, null: false
+    t.string   "last_name",  limit: 255, null: false
+    t.string   "email",      limit: 255, null: false
+    t.string   "phab_id",    limit: 255, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end
