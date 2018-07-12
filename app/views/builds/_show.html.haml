@@ -48,10 +48,10 @@
             %td{ style: "vertical-align: middle; width: 125px; align: center" }
               %strong= bug[:status]
             %td{ style: "vertical-align: middle; width: 350px" }
-              -# - if !bug[:relations].empty?
-              -#   %table
-              -#     - bug[:relations].each do |relation|
-              -#       %tr
-              -#         %td{ style: current_user.email == relation[:tester] ? "font-weight: bold;" : "" }= relation[:tester] + ' (' + relation[:relation] + ')'
+              - if !bug[:relations].empty?
+                %table
+                  - bug[:relations].each do |relation|
+                    %tr
+                      %td{ style: current_user.email == relation[:tester] ? "font-weight: bold;" : "" }= relation[:tester] + ' (' + relation[:relation] + ')'
   - else
     No bug found

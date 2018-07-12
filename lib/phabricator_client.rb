@@ -38,7 +38,7 @@ class PhabricatorClient
     task[:cc] = ['TODO']
     task[:qa_contact] = 'TODO'
     task[:product] = 'TODO'
-    task[:relations] = []
+    task[:relations] = task[:creator] ? task[:relations] = [{ tester: task[:creator], relation: 'creator' }] : []
     task
   end
 
