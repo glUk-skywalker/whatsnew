@@ -11,7 +11,7 @@ class PhabricatorClient
     next_page = true
     hash_content = []
 
-    params = { constraints: { ids: task_list, statuses: ['testing'] } }
+    params = { constraints: { ids: task_list } }
     loop do
       uri = URI(query_url(params))
       response = Net::HTTP.get(uri)

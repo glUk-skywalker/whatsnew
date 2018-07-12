@@ -33,7 +33,7 @@
                     %tr
                       %td{ style: current_user.email == relation[:tester] ? "font-weight: bold;" : "" }= relation[:tester] + ' (' + relation[:relation] + ')'
         -else
-          %tr.bug-row.collapse.in{ bgcolor: { 'DOCUMENTED' => '#67E46F', 'VERIFIED' => '#67E46F', 'TO-DOCUMENT' => '#6C8CD5', 'TO-VERIFY' => '#6C8CD5', 'REOPENED' => '#FF7373', 'CLOSED' => '#848181' }[bug[:status]] }
+          %tr.bug-row.collapse.in{ bgcolor: { 'RESOLVED' => '#67E46F' }[bug[:status]] }
             %td{ style: "vertical-align: middle; width: 65px", bgcolor: "white" }
               .bug-link-container
                 %font
