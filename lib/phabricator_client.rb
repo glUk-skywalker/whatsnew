@@ -13,22 +13,12 @@ class PhabricatorClient
 
     params = { constraints: { ids: task_list, statuses: ['testing'] } }
     loop do
-      url = "#{BASE_URL}/api/maniphest.search?api.token=#{TOKEN}&#{params.to_query}"
-      uri = URI(url)
+      uri = URI(query_url(params))
       response = Net::HTTP.get(uri)
       hash_response = JSON.parse(response)
 
       hash_response['result']['data'].each do |t|
-        task = {}
-        task[:id] = t['id']
-        task[:summary] = t['fields']['name']
-        task[:status] = t['fields']['status']['value'].upcase
-        task[:creator] = t['fields']['authorPHID']
-        task[:cc] = ['TODO']
-        task[:qa_contact] = 'TODO'
-        task[:product] = 'TODO'
-        task[:relations] = []
-        hash_content << task
+        hash_content << make_task(t)
       end
 
       next_page = hash_response['result']['cursor']['after']
@@ -37,5 +27,22 @@ class PhabricatorClient
     end
 
     hash_content
+  end
+
+  def self.make_task(data)
+    task = {}
+    task[:id] = data['id']
+    task[:summary] = data['fields']['name']
+    task[:status] = data['fields']['status']['value'].upcase
+    task[:creator] = Tester.find_by_phab_id(data['fields']['authorPHID'])&.email
+    task[:cc] = ['TODO']
+    task[:qa_contact] = 'TODO'
+    task[:product] = 'TODO'
+    task[:relations] = []
+    task
+  end
+
+  def self.query_url(params)
+    "#{BASE_URL}/api/maniphest.search?api.token=#{TOKEN}&#{params.to_query}"
   end
 end
