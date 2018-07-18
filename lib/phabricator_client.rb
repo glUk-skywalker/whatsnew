@@ -11,7 +11,7 @@ class PhabricatorClient
     next_page = true
     hash_content = []
 
-    params = { constraints: { ids: task_list } }
+    params = { constraints: { ids: task_list }, attachments: { subscribers: true} }
     loop do
       uri = URI(query_url(params))
       response = Net::HTTP.get(uri)
@@ -38,8 +38,19 @@ class PhabricatorClient
     task[:cc] = ['TODO']
     task[:qa_contact] = 'TODO'
     task[:product] = 'TODO'
-    task[:relations] = task[:creator] ? task[:relations] = [{ tester: task[:creator], relation: 'creator' }] : []
+    task[:relations] = relations(data)
     task
+  end
+
+  def self.relations(data)
+    subs_phids = data['attachments']['subscribers']['subscriberPHIDs']
+    subs_emails = Tester.where(phab_id: subs_phids).map(&:email)
+    creator = Tester.find_by_phab_id(data['fields']['authorPHID'])&.email
+    subs_emails -= [creator] if creator
+    ret = []
+    ret << { tester: creator, relation: 'creator' } if creator
+    ret += subs_emails.map{ |s| { tester: s, relation: 'subscriber' } }
+    ret
   end
 
   def self.query_url(params)
