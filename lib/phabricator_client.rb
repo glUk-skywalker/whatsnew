@@ -54,6 +54,7 @@ class PhabricatorClient
   end
 
   def self.get_project_names(phids)
+    return [] if phids.empty?
     params = { phids: phids }
     uri = URI(projects_url(params))
     response = Net::HTTP.get(uri)
