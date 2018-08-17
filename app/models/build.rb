@@ -1,4 +1,6 @@
 class Build < ActiveRecord::Base
+  NOT_PROCESSED_BUG_STATUSES = %w[RESOLVED TO-VERIFY TO-DOCUMENT].freeze
+
   def bugs_info
     return @bugs_info if @bugs_info                                             # avoid extra requests if information exists
     bugs = BugzillaClient.get_bugs bug_list
@@ -23,6 +25,20 @@ class Build < ActiveRecord::Base
 
   def tasks?
     task_list.split(',').any?
+  end
+
+  def bugs_processed?
+    bugs_info.select{ |b|
+      b[:status].in?(NOT_PROCESSED_BUG_STATUSES) && b[:included]
+    }.any?
+  end
+
+  def tasks_processed?
+    tasts_info.refect{ |t| t[:status] == 'RESOLVED' }.any?
+  end
+
+  def processed?
+    bugs_processed? && tasks_processed?
   end
 
   private
