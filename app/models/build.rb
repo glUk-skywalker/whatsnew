@@ -34,7 +34,7 @@ class Build < ActiveRecord::Base
   end
 
   def tasks_processed?
-    tasks_info.refect{ |t| t[:status] == 'RESOLVED' }.any?
+    tasks_info.reject{ |t| t[:status] == 'RESOLVED' }.any?
   end
 
   def processed?
