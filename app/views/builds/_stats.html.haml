@@ -1,7 +1,7 @@
 %table.stats-title
   %tr
     %td
-      - if !@build.processed
+      - if !@build.processed?
         = image_tag "not_fully_processed-large.png", title: "Verification is not completed!", id: "large-status-icon", class: "not_fully_processed"
       - else
         = image_tag "processed-large.png", title: "Verification completed", id: "large-status-icon", class: "processed"
