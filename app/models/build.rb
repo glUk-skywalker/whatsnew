@@ -37,8 +37,9 @@ class Build < ActiveRecord::Base
     tasks_info.reject{ |t| t[:status] == 'RESOLVED' }.any?
   end
 
-  def processed?
-    bugs_processed? && tasks_processed?
+  def set_processed!
+    self.processed = bugs_processed? && tasks_processed?
+    save
   end
 
   private

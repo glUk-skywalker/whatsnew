@@ -5,6 +5,7 @@ class BuildsController < AuthenticatedUserController
 
   def show
     @build = Build.find(params[:id])
+    @build.set_processed!
 
     respond_to do |format|
       format.js { authenticated? }
