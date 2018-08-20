@@ -69,11 +69,13 @@ $(function() {
   $('#build-info').show();
   $(document)
     .ajaxStart(function() {
+      $(".build-link").css('pointer-events','none');
       $('#loading-indicator').show(); // show on any Ajax event.
       $('#build-info').hide();
       $('#stats-subcontainer').hide();
     })
     .ajaxStop(function() {
+      $(".build-link").css('pointer-events','');
       $('#loading-indicator').hide(); // hide it when it is done.
       $('#build-info').show();
       $('#stats-subcontainer').show();
