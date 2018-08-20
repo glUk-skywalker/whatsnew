@@ -1,5 +1,6 @@
 class Build < ActiveRecord::Base
   NOT_PROCESSED_BUG_STATUSES = %w[RESOLVED TO-VERIFY TO-DOCUMENT].freeze
+  PROCESSED_TASK_STATUSES = %w[RESOLVED DUPLICATE].freeze
 
   def bugs_info
     return @bugs_info if @bugs_info                                             # avoid extra requests if information exists
@@ -34,7 +35,7 @@ class Build < ActiveRecord::Base
   end
 
   def tasks_processed?
-    tasks_info.reject{ |t| t[:status] == 'RESOLVED' }.any?
+    tasks_info.reject{ |t| t[:status].in?(PROCESSED_TASK_STATUSES) }.any?
   end
 
   def set_processed!

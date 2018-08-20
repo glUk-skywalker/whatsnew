@@ -59,7 +59,7 @@ class PhabricatorClient
     uri = URI(projects_url(params))
     response = Net::HTTP.get(uri)
     hash_response = JSON.parse(response)
-    hash_response['result']['data'].map{ |k, v| v['name'] }
+    hash_response['result']['data'].map{ |_, v| v['name'] }
   end
 
   def self.projects_url(params)
