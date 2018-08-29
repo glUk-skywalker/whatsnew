@@ -1,5 +1,5 @@
 class Build < ActiveRecord::Base
-  NOT_PROCESSED_BUG_STATUSES = %w[RESOLVED TO-VERIFY TO-DOCUMENT].freeze
+  PROCESSED_BUG_STATUSES = %w[VERIFIED CLOSED INVALID TO-VERIFY TO-DOCUMENT].freeze
   PROCESSED_TASK_STATUSES = %w[RESOLVED DUPLICATE].freeze
 
   def bugs_info
@@ -29,13 +29,15 @@ class Build < ActiveRecord::Base
   end
 
   def bugs_processed?
-    bugs_info.select{ |b|
-      b[:status].in?(NOT_PROCESSED_BUG_STATUSES) && b[:included]
-    }.any?
+    bugs_info.reject{ |b|
+      PROCESSED_BUG_STATUSES.include?(b[:status]) && b[:included]
+    }.empty?
   end
 
   def tasks_processed?
-    tasks_info.reject{ |t| t[:status].in?(PROCESSED_TASK_STATUSES) }.any?
+    tasks_info.reject{ |t|
+      PROCESSED_TASK_STATUSES.include?(t[:status])
+    }.empty?
   end
 
   def set_processed!
