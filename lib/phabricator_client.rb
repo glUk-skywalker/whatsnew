@@ -4,24 +4,17 @@ class PhabricatorClient
 
   def self.get_tasks(task_list)
     return [] if task_list.empty?
-    next_page = true
     hash_content = []
 
-    params = { constraints: { ids: task_list }, attachments: { subscribers: true, projects: true } }
-    loop do
-      uri = URI(query_url(params))
-      response = Net::HTTP.get(uri)
-      hash_response = JSON.parse(response)
+    c_path = "#{Rails.root}/bin/phab_client"
+    token_prm = "--token=\"#{TOKEN}\""
+    url_prm = "--url=\"#{BASE_URL}\""
+    ids_prm = "--ids=#{task_list.join(',')}"
+    json_string = `#{c_path} #{token_prm} #{url_prm} #{ids_prm}`
 
-      hash_response['result']['data'].each do |t|
-        hash_content << make_task(t)
-      end
-
-      next_page = hash_response['result']['cursor']['after']
-      break unless next_page
-      params[:after] = next_page
+    JSON.parse(json_string).each do |t_i|
+      hash_content << make_task(t_i)
     end
-
     hash_content
   end
 
@@ -33,7 +26,7 @@ class PhabricatorClient
     task[:creator] = Tester.find_by_phab_id(data['fields']['authorPHID'])&.email
     task[:cc] = ['TODO']
     task[:qa_contact] = 'TODO'
-    task[:product] = get_project_names(data['attachments']['projects']['projectPHIDs']).join("\n")
+    task[:product] = data['projects'].join("\n")
     task[:relations] = relations(data)
     task
   end
