@@ -24,7 +24,7 @@ class PhabricatorClient
     task[:summary] = data['fields']['name']
     task[:status] = data['fields']['status']['value'].upcase
     task[:creator] = Tester.find_by_phab_id(data['fields']['authorPHID'])&.email
-    task[:cc] = ['TODO']
+    task[:cc] = relations(data)
     task[:qa_contact] = 'TODO'
     task[:product] = data['projects'].join("\n")
     task[:relations] = relations(data)
