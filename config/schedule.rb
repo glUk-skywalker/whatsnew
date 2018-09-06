@@ -24,4 +24,5 @@ set :environment, 'development'
 every 1.hour do
   rake "check:main"
   rake "check:beta"
+  rake "check:alpha"
 end
