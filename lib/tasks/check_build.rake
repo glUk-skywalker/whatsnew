@@ -15,9 +15,9 @@ namespace :check do
   end
 
   task alpha: :environment do
-    puts DateTime.now.to_s + ' checking beta started...'
+    puts DateTime.now.to_s + ' checking alpha started...'
     check_alpha
-    puts DateTime.now.to_s + ' checking beta finished'
+    puts DateTime.now.to_s + ' checking alpha finished'
   end
 
   task :populate => :environment do
