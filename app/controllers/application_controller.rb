@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  helper PhabAuth::Engine.helpers
+
   def current_user
     @current_user ||= create_user_from_session
   end
@@ -12,5 +14,4 @@ class ApplicationController < ActionController::Base
   def create_user_from_session
     User.create(session[:user_id], session[:user_name], session[:user_email])
   end
-
 end

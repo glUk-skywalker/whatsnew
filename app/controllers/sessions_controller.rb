@@ -2,8 +2,9 @@ class SessionsController < ApplicationController
   layout 'unauthenticated', only: [:new]
 
   def create
-    user = create_user_from_omniauth_hash(request.env['omniauth.auth'])
-    set_current_user(user)
+    user_info = params[:result][:user_info]
+    user = User.create(user_info['userName'], user_info[:realName], user_info[:primaryEmail])
+    set_current_user!(user)
     redirect_to root_path
   end
 

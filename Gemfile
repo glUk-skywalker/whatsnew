@@ -13,6 +13,7 @@ gem "rails_config", "~> 0.3.3"
 gem "whenever", "~> 0.9.0"
 gem 'xmlrpc'
 gem 'git', '~> 1.5'
+gem 'phab_auth', git: 'https://github.com/glUk-skywalker/phab_auth.git'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

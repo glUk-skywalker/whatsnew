@@ -9,6 +9,4 @@
     %legend
       Login
     .control-group
-      = text_field_tag 'username', nil, placeholder: "Login", class: "form-control"
-      = password_field_tag 'password', nil, placeholder: "Password", class: "form-control"
-      = submit_tag "Login", class: "form-control", width: '200px'
+      = phab_login_link

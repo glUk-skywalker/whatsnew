@@ -6,8 +6,9 @@ Whatsnew::Application.routes.draw do
 
   match 'signin', to: 'sessions#new', via: :get, as: 'sign_in'
   match 'signout', to: 'sessions#destroy', via: :get, as: 'sign_out'
-  match 'auth/:provider/callback', to: 'sessions#create', via: :get
+  match 'create_session', to: 'sessions#create', via: :get, as: 'create_session'
   match 'auth/failure', to: 'sessions#failure', via: :get
+  mount PhabAuth::Engine, at: 'auth'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -49,7 +50,7 @@ Whatsnew::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
