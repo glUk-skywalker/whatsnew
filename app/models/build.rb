@@ -1,6 +1,6 @@
 class Build < ActiveRecord::Base
   PROCESSED_BUG_STATUSES = %w[VERIFIED CLOSED INVALID TO-VERIFY TO-DOCUMENT].freeze
-  PROCESSED_TASK_STATUSES = %w[RESOLVED DUPLICATE].freeze
+  PROCESSED_TASK_STATUSES = %w[RESOLVED DUPLICATE WONTFIX].freeze
 
   def bugs_info
     return @bugs_info if @bugs_info                                             # avoid extra requests if information exists
