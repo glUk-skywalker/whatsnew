@@ -30,7 +30,7 @@ class Build < ActiveRecord::Base
 
   def bugs_processed?
     bugs_info.reject{ |b|
-      PROCESSED_BUG_STATUSES.include?(b[:status]) && b[:included]
+      PROCESSED_BUG_STATUSES.include?(b[:status])
     }.empty?
   end
 
