@@ -1,12 +1,3 @@
-%link{ href: 'https://fonts.googleapis.com/css?family=Libre+Baskerville', rel: 'stylesheet' }
-%script{ src: 'https://metrics.megaputer.ru/static/vendor/requirejs/require.js' }
-
 #root
 :javascript
-  require.config({
-    baseUrl: "https://metrics.megaputer.ru/static/ts/build",
-  });
-
-  requirejs(['login'], function (page) {
-    page.render('QA tracker', "#{phab_login_url}");
-  });
+  login.render('QA tracker', "#{phab_login_url}");
