@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/glUk-skywalker/phab_auth.git
-  revision: 9062ec7ed7f48305935133af574e2d37dfcb8058
+  revision: e95143fee932e0f002d018b8aa2a07cdfd5f3d21
   specs:
     phab_auth (0.0.1)
       rails (~> 4.2.10)
@@ -128,7 +128,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (5.0.1)
     netrc (0.11.0)
-    nokogiri (1.8.4)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     omniauth (1.3.2)
       hashie (>= 1.2, < 4)
