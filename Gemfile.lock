@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/glUk-skywalker/phab_auth.git
-  revision: e95143fee932e0f002d018b8aa2a07cdfd5f3d21
+  revision: e2357ee1c74ce53627b6283dcd7abb910f26bf6e
   specs:
     phab_auth (0.0.1)
       rails (~> 4.2.10)
