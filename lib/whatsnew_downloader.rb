@@ -35,7 +35,7 @@ class WhatsnewDownloader
 
       begin
         builds_info << {
-          number: b.delete(' Rev. ').b[/Build:  6.[0.5].\d+/].split('.').last,
+          number: b.sub(' Rev. ', '').b[/Build:  6.[0.5].\d+/].split('.').last,
           bug_list: b.scan(/\n#\d+/).join(',').gsub("\n#", ''),
           task_list: b.scan(/\nT\d+/).join(',').gsub("\n", ''),
           whatsnew_time: normalize_date(b[date_mask].split('   ').last),
