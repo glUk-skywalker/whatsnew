@@ -17,7 +17,7 @@ class Build < ActiveRecord::Base
   end
 
   def issues_info
-    bugs_info + tasks_info
+    bugs_info
   end
 
   def bugs?
